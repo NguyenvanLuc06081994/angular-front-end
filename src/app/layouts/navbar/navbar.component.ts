@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
 import {AuthService} from '../../services/auth.service';
+import {HouseService} from '../../services/house.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,16 +11,18 @@ import {AuthService} from '../../services/auth.service';
 })
 export class NavbarComponent implements OnInit {
   userLoginCurrent;
+  houses;
 
   constructor(private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private houseService: HouseService) {
   }
 
   ngOnInit(): void {
- 
-
     this.userLoginCurrent = this.authService.getUserLogin();
-
+    this.houseService.getAllHouse().subscribe(data => {
+      this.houses = data;
+    });
   }
 
   logout(): any {

@@ -12,18 +12,17 @@ import {HomeComponent} from './layouts/home/home.component';
 import {RegisterComponent} from './customers/register/register.component';
 import {AppRoutingModule} from './app-routing.module';
 import {NavbarComponent} from './layouts/navbar/navbar.component';
-
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
-
-
 import {AddComponent} from './houses/add/add.component';
 import {DetailComponent} from './houses/detail/detail.component';
 import {FooterComponent} from './layouts/footer/footer.component';
 import {BillComponent} from './houses/bill/bill.component';
 import { CheckoutComponent } from './houses/checkout/checkout.component';
+import { BillListComponent } from './bill-list/bill-list.component';
+
 
 
 
@@ -39,7 +38,8 @@ import { CheckoutComponent } from './houses/checkout/checkout.component';
     DetailComponent,
     FooterComponent,
     BillComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    BillListComponent
   ],
   imports: [
     BrowserModule,

@@ -10,11 +10,13 @@ import {IsAuthenGuard} from './is-authen.guard';
 import {AddComponent} from './houses/add/add.component';
 import {DetailComponent} from './houses/detail/detail.component';
 import {CheckoutComponent} from './houses/checkout/checkout.component';
+import {BillListComponent} from './bill-list/bill-list.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'billDetail/:id', component: BillListComponent},
   {
     path: 'home',
     children: [

@@ -23,15 +23,15 @@
     <div class="col-lg-8">
       <div class="room-booking">
         <h3>Your Reservation</h3>
-        <form action="#">
+        <form [formGroup]="formCheckout" (ngSubmit)="addBill()">
           <div class="check-date">
             <label for="date-in">Check In:</label>
-            <input type="date" class="date-input" id="date-in">
+            <input type="date" class="date-input" id="date-in" formControlName="checkIn">
 
           </div>
           <div class="check-date">
             <label for="date-out">Check Out:</label>
-            <input type="date" class="date-input" id="date-out">
+            <input type="date" class="date-input" id="date-out" formControlName="checkOut">
           </div>
          <div class="check-date">
            <label>Your Full Name:</label>
@@ -47,20 +47,24 @@
           </div>
           <div class="select-option">
             <label for="guest">Ordered:</label>
-            <select id="guest" style="display: none">
-              <option value="">3 Adults</option>
+            <select id="guest"  formControlName="order">
+              <option value="1 Adults">1 Adults</option>
+              <option value="2 Adults">2 Adults</option>
+              <option value="3 Adults">3 Adults</option>
+              <option value="4 Adults">4 Adults</option>
             </select>
-            <div class="nice-select" tabindex="0">
-              <span class="current">I am the main residence</span>
-              <ul class="list">
-                <li data-value class="option">I am the main residence</li>
-                <li data-value class="option">For someone else</li>
-              </ul>
-            </div>
+<!--            <div class="nice-select" tabindex="0">-->
+
+<!--              <span class="current" formControlName="order">I am the main residence</span>-->
+<!--              <ul class="list">-->
+<!--                <li data-value class="option">I am the main residence</li>-->
+<!--                <li data-value class="option">For someone else</li>-->
+<!--              </ul>-->
+<!--            </div>-->
           </div>
           <div class="check-date">
             <label>Special Request</label>
-            <textarea type="text" style="width: 100%; height: 132px"></textarea>
+            <textarea type="text" style="width: 100%; height: 132px" formControlName="description"></textarea>
           </div>
 
           <button type="submit">Booking</button>

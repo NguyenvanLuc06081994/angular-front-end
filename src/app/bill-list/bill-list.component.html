@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">TotalPrice</th>
+      <th scope="col">CheckIn</th>
+      <th scope="col">CheckOut</th>
+      <th scope="col">Status</th>
+      <th scope="col">People</th>
+      <th scope="col">Customer Book</th>
+      <th scope="col">House Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let bill of bills; let i = index">
+      <td>{{i+1}}</td>
+      <td>{{bill.totalPrice}}</td>
+      <td>{{bill.checkIn}}</td>
+      <td>{{bill.checkOut}}</td>
+      <td>{{bill.status}}</td>
+      <td>{{bill.order}}</td>
+      <ng-container *ngFor="let customer of customers">
+        <td *ngIf="customer.id == bill.customer_id">{{customer.username}}</td>
+      </ng-container>
+      <ng-container *ngFor="let house of houses">
+        <td *ngIf="house.id == bill.house_id">{{house.name}}</td>
+      </ng-container>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<app-footer></app-footer>

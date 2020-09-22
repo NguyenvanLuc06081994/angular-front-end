@@ -16,4 +16,8 @@ export class BillService extends HttpBaseService {
   addBill(data): Observable<any> {
     return this.http.post<Observable<any>>(environment.url + '/bills', data, {headers: this.getHeaders()});
   }
+
+  getBillByUserId(id: number): Observable<any> {
+    return this.http.get(environment.url + '/bills/' + id, {headers: this.getHeaders()});
+  }
 }

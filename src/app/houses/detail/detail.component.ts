@@ -85,7 +85,8 @@ export class DetailComponent implements OnInit {
     this.bill.checkIn = this.formBill.value.checkIn;
     this.bill.checkOut = this.formBill.value.checkOut;
     this.bill.order = this.formBill.value.order;
-    this.bill.customer_id = this.customer.id;
+    // @ts-ignore
+    this.bill.customer_id = userLogin.id;
     // @ts-ignore
     this.bill.house_id = this.house.id;
     const checkIn = new Date(`"${this.formBill.value.checkIn}"`);

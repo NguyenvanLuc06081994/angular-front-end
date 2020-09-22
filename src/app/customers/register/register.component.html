@@ -1,0 +1,101 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h1 class="text-center"> Register</h1>
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" formControlName="username" placeholder="Username"
+             aria-label="Username">
+    </div>
+    <div *ngIf="username.touched && username.invalid">
+      <div *ngIf="username.errors.required">
+        <p class="text text-danger"> *Username required</p>
+      </div>
+      <div *ngIf="username.errors.maxlength">
+        <p class="text text-danger"> *Username no more than 30 characters </p>
+      </div>
+      <div *ngIf="username.errors.minlength">
+        <p class="text text-danger"> *Username no less than 6 characters</p>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <input type="email" class="form-control " formControlName="email" placeholder="Email" aria-label="Email">
+    </div>
+    <div *ngIf="email.touched && email.invalid">
+      <div *ngIf="email.errors.required">
+        <p class="text text-danger"> *Email required</p>
+      </div>
+      <div *ngIf="email.errors.pattern">
+        <p class="text text-danger"> *Email not format</p>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <input type="number" class="form-control" formControlName="phone" placeholder="Phone" aria-label="Phone">
+    </div>
+    <div *ngIf="phone.touched && phone.invalid">
+      <div *ngIf="phone.errors.required">
+        <p class="text text-danger"> *Phone required</p>
+      </div>
+      <div *ngIf="phone.errors.pattern">
+        <p class="text text-danger"> *Phone not format</p>
+      </div>
+      <div *ngIf="phone.errors.maxlength">
+        <p class="text text-danger"> *Phone not format</p>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <textarea type="text" class="form-control" formControlName="address" placeholder="Address"
+                aria-label="Address"></textarea>
+    </div>
+    <div *ngIf="address.touched && address.invalid">
+      <div *ngIf="address.errors.required">
+        <p class="text text-danger"> *Address required</p>
+      </div>
+      <div *ngIf="address.errors.maxlength">
+        <p class="text text-danger"> *Address no more than 30 character</p>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <input type="password" class="form-control" formControlName="password" placeholder="Password"
+             aria-label="Password">
+    </div>
+    <div *ngIf="password.touched&& password.invalid">
+      <div *ngIf="password.errors.required">
+        <p class="text text-danger"> *Password required</p>
+      </div>
+      <div *ngIf="password.errors.maxlength">
+        <p class="text text-danger"> *Password no more than 20 character</p>
+      </div>
+      <div *ngIf="password.errors.minlength">
+        <p class="text text-danger"> *Password no less than 6 character</p>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <input type="file" class="form-control" formControlName="inputFile"
+             (change)="upload($event)">
+    </div>
+   <div *ngIf="inputFile.touched && inputFile.invalid">
+     <div *ngIf="inputFile.errors.required">
+       <p class="text text-danger" > * File required </p>
+     </div>
+   </div>
+    <div *ngIf="!this.downloadURL && (this.downloadURL != null && this.downloadURL !== '')">
+      <img src=" " alt="" style="width: 150px; height: 150px">
+    </div>
+
+    <div *ngIf="this.downloadURL">
+      <img src="{{downloadURL}}" alt="" style="width: 150px; height: 150px">
+    </div>
+
+    <div class="row ml-1 text-center">
+      <div>
+        <button [disabled]="registerForm.invalid" class="btn btn-success ">Register</button>
+      </div>
+      <div>
+        <a class="btn btn-danger">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>
+<br>
+<br>
+<app-footer></app-footer>

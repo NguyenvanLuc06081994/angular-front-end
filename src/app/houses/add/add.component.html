@@ -1,0 +1,118 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h1 class="text-center"> Add New House</h1>
+  <form [formGroup]="addHouseForm" (ngSubmit)="addSubmit()">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" formControlName="name" placeholder="Name House"
+             aria-label="name">
+    </div>
+    <div *ngIf="name.touched && name.invalid">
+      <div *ngIf="name.errors.required">
+        <p class="text text-danger"> *Name House required</p>
+      </div>
+      <div *ngIf="name.errors.maxlength">
+        <p class="text text-danger"> *Name House no more than 120 characters </p>
+      </div>
+      <div *ngIf="name.errors.minlength">
+        <p class="text text-danger"> *Name House no less than 6 characters</p>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <select formControlName="type_house" aria-label="type_house" class="custom-select" id="typeHouse" >
+        <option value="Nhà Nghỉ">Nhà Nghỉ</option>
+        <option value="Khách Sạn">Khách sạn</option>
+        <option value="Homestay">Homestay</option>
+        <option value="Penhouse">Penhouse</option>
+      </select>
+
+    </div>
+
+    <div class="input-group mb-3">
+      <select formControlName="type_room" aria-label="type_room" class="custom-select"  >
+        <option value="Phòng thường">Phòng thường</option>
+        <option value="Phòng Vip">Phòng Vip</option>
+      </select>
+    </div>
+
+    <div class="input-group mb-3">
+      <textarea type="text" class="form-control" formControlName="address" placeholder="Address"
+                aria-label="Address"></textarea>
+    </div>
+    <div *ngIf="address.touched && address.invalid">
+      <div *ngIf="address.errors.required">
+        <p class="text text-danger"> *Address required</p>
+      </div>
+      <div *ngIf="address.errors.maxlength">
+        <p class="text text-danger"> *Address no more than 250 character</p>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <input type="number" class="form-control" formControlName="bedroom" placeholder="Bedroom"
+             aria-label="bedroom">
+    </div>
+    <div *ngIf="bedroom.touched && bedroom.invalid">
+      <div *ngIf="bedroom.errors.required">
+        <p class="text text-danger"> *Bedroom required</p>
+      </div>
+      <div *ngIf="bedroom.errors.min">
+        <p class="text text-danger">*Bedroom min 1</p>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <input type="number" class="form-control" formControlName="bathroom" placeholder="Bathroom"
+             aria-label="bathroom">
+    </div>
+    <div *ngIf="bathroom.touched && bathroom.invalid">
+      <div *ngIf="bathroom.errors.required">
+        <p class="text text-danger"> *Bathroom required</p>
+      </div>
+      <div *ngIf="bathroom.errors.min">
+        <p class="text text-danger">*Bathroom min 1</p>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <textarea type="text" class="form-control" formControlName="description" placeholder="Description"
+                aria-label="Description"></textarea>
+    </div>
+    <div *ngIf="address.touched && address.invalid">
+      <div *ngIf="address.errors.required">
+        <p class="text text-danger"> *Description required</p>
+      </div>
+      <div *ngIf="address.errors.maxlength">
+        <p class="text text-danger"> *Description no more than 250 character</p>
+      </div>
+      <div *ngIf="address.errors.minlength">
+        <p class="text text-danger"> *Description no less than 6 characters</p>
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" formControlName="status" placeholder="status"
+             aria-label="status">
+    </div>
+
+    <div class="input-group mb-3">
+      <input type="number" class="form-control" formControlName="price" placeholder="price"
+             aria-label="price">
+    </div>
+    <div *ngIf="price.touched && price.invalid">
+      <div *ngIf="price.errors.required">
+        <p class="text text-danger"> *Price required</p>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <input type="file" class="form-control" formControlName="image" (change)="upload($event)"
+             aria-label="imageHouse">
+    </div>
+
+    <div class="row ml-1 text-center">
+      <button class="btn btn-info">Add</button>
+      <button (click)="list()" class="btn btn-secondary">Cancel</button>
+    </div>
+  </form>
+</div>
+<app-footer></app-footer>

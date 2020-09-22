@@ -1,0 +1,194 @@
+<app-navbar></app-navbar>
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <h2>Our Rooms</h2>
+          <div class="bt-option">
+            <a [routerLink]="['/home']">Home</a>
+            <a [routerLink]="['/home/list']"><span>Rooms</span></a>
+              <span>{{house.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Breadcrumb Section End -->
+
+<!-- Room Details Section Begin -->
+<section class="room-details-section spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8" >
+        <div class="room-details-item">
+          <img src="{{house.image}}" alt="">
+          <div class="rd-text">
+            <div class="rd-title">
+              <h3>{{house.name}}</h3>
+              <div class="rdt-right">
+                <div class="rating">
+                  <i class="icon_star"></i>
+                  <i class="icon_star"></i>
+                  <i class="icon_star"></i>
+                  <i class="icon_star"></i>
+                  <i class="icon_star-half_alt"></i>
+                </div>
+                <a [routerLink]="['/home/checkout',house.id]">Booking Now</a>
+              </div>
+            </div>
+            <h2>{{house.price}} VNĐ<span>/Pernight</span></h2>
+            <table>
+              <tbody>
+              <tr>
+                <td class="r-o">Type Home:</td>
+                <td>{{house.type_house}}</td>
+              </tr>
+              <tr>
+                <td class="r-o">Type Room:</td>
+                <td>{{house.type_room}}</td>
+              </tr>
+              <tr>
+                <td class="r-o">Bedroom:</td>
+                <td>{{house.bedroom}}</td>
+              </tr>
+              <tr>
+                <td class="r-o">Bathroom:</td>
+                <td>{{house.bathroom}}</td>
+              </tr>
+              <tr>
+                <td class="r-o">Address:</td>
+                <td>{{house.address}}</td>
+              </tr>
+              <tr>
+                <td class="r-o">Status:</td>
+                <td>{{house.status}}</td>
+              </tr>
+              <tr>
+                <td class="r-o">Host:</td>
+                <td>{{customer.username}}</td>
+              </tr>
+              <tr>
+                <td class="r-o">Phone:</td>
+                <td>{{customer.phone}}</td>
+              </tr>
+              <tr>
+                <td class="r-o">Services:</td>
+                <td>Wifi, Television, Bathroom,...</td>
+              </tr>
+              </tbody>
+            </table>
+            <p class="f-para">{{house.description}}</p>
+
+          </div>
+        </div>
+        <div class="rd-reviews">
+          <h4>Reviews</h4>
+          <div class="review-item">
+            <div class="ri-pic">
+              <img src="../../../assets/img/room/avatar/avatar-1.jpg" alt="">
+            </div>
+            <div class="ri-text">
+              <span>27 Aug 2019</span>
+              <div class="rating">
+                <i class="icon_star"></i>
+                <i class="icon_star"></i>
+                <i class="icon_star"></i>
+                <i class="icon_star"></i>
+                <i class="icon_star-half_alt"></i>
+              </div>
+              <h5>Brandon Kelley</h5>
+              <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
+                magnam.</p>
+            </div>
+          </div>
+          <div class="review-item">
+            <div class="ri-pic">
+              <img src="../../../assets/img/room/avatar/avatar-2.jpg" alt="">
+            </div>
+            <div class="ri-text">
+              <span>27 Aug 2019</span>
+              <div class="rating">
+                <i class="icon_star"></i>
+                <i class="icon_star"></i>
+                <i class="icon_star"></i>
+                <i class="icon_star"></i>
+                <i class="icon_star-half_alt"></i>
+              </div>
+              <h5>Brandon Kelley</h5>
+              <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+                adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
+                magnam.</p>
+            </div>
+          </div>
+        </div>
+        <div class="review-add">
+          <h4>Add Review</h4>
+          <form action="#" class="ra-form">
+            <div class="row">
+              <div class="col-lg-6">
+                <input type="text" placeholder="Name*">
+              </div>
+              <div class="col-lg-6">
+                <input type="text" placeholder="Email*">
+              </div>
+              <div class="col-lg-12">
+                <div>
+                  <h5>You Rating:</h5>
+                  <div class="rating">
+                    <i class="icon_star"></i>
+                    <i class="icon_star"></i>
+                    <i class="icon_star"></i>
+                    <i class="icon_star"></i>
+                    <i class="icon_star-half_alt"></i>
+                  </div>
+                </div>
+                  <textarea placeholder="Your Review"></textarea>
+                <button type="submit">Submit Now</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="room-booking">
+          <h3>Your Reservation</h3>
+          <form action="#" [formGroup]="formBill" (ngSubmit)="addBill()">
+            <div class="check-date">
+              <label for="date-in">Check In:</label>
+              <input type="date" class="date-input hasDatepicker" id="date-in" formControlName="checkIn">
+              <i class="icon_calendar"></i>
+            </div>
+            <div class="check-date">
+              <label for="date-out">Check Out:</label>
+              <input type="date" class="date-input hasDatepicker" id="date-out" formControlName="checkOut">
+              <i class="icon_calendar"></i>
+            </div>
+            <div class="select-option">
+              <label for="guest">Guests:</label>
+              <select id="guest" formControlName="order">
+                <option value="1">1 Adults</option>
+                <option value="2">2 Adults</option>
+                <option value="3">3 Adults</option>
+                <option value="4">4 Adults</option>
+              </select>
+            </div>
+            <div class="select-option">
+              <label for="room">Room:</label>
+              <select id="room">
+                <option value="">1 Room</option>
+              </select>
+            </div>
+            <button>Check Availability</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Room Details Section End -->
+<app-footer></app-footer>

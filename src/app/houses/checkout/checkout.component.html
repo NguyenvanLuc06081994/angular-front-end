@@ -1,0 +1,127 @@
+<app-navbar></app-navbar>
+
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb-text">
+          <h2>Our Rooms</h2>
+          <div class="bt-option">
+            <a [routerLink]="['/home']">Home</a>
+            <a [routerLink]="['/home/list']"><span>Rooms</span></a>
+            <span>Booking</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Breadcrumb Section End -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="room-booking">
+        <h3>Your Reservation</h3>
+        <form action="#">
+          <div class="check-date">
+            <label for="date-in">Check In:</label>
+            <input type="date" class="date-input" id="date-in">
+
+          </div>
+          <div class="check-date">
+            <label for="date-out">Check Out:</label>
+            <input type="date" class="date-input" id="date-out">
+          </div>
+         <div class="check-date">
+           <label>Your Full Name:</label>
+           <input type="text">
+         </div>
+          <div class="check-date">
+            <label>Your Phone:</label>
+            <input type="text">
+          </div>
+          <div class="check-date">
+            <label>Your Email:</label>
+            <input type="text">
+          </div>
+          <div class="select-option">
+            <label for="guest">Ordered:</label>
+            <select id="guest" style="display: none">
+              <option value="">3 Adults</option>
+            </select>
+            <div class="nice-select" tabindex="0">
+              <span class="current">I am the main residence</span>
+              <ul class="list">
+                <li data-value class="option">I am the main residence</li>
+                <li data-value class="option">For someone else</li>
+              </ul>
+            </div>
+          </div>
+          <div class="check-date">
+            <label>Special Request</label>
+            <textarea type="text" style="width: 100%; height: 132px"></textarea>
+          </div>
+
+          <button type="submit">Booking</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="room-details-item">
+        <img src="{{house.image}}" alt="">
+        <div class="rd-text">
+
+          <h2>{{house.price}} VNĐ<span>/Pernight</span></h2>
+          <table>
+            <tbody>
+            <tr>
+              <td class="r-o">Type Home:</td>
+              <td>{{house.type_house}}</td>
+            </tr>
+            <tr>
+              <td class="r-o">Type Room:</td>
+              <td>{{house.type_room}}</td>
+            </tr>
+            <tr>
+              <td class="r-o">Bedroom:</td>
+              <td>{{house.bedroom}}</td>
+            </tr>
+            <tr>
+              <td class="r-o">Bathroom:</td>
+              <td>{{house.bathroom}}</td>
+            </tr>
+            <tr>
+              <td class="r-o">Address:</td>
+              <td>{{house.address}}</td>
+            </tr>
+            <tr>
+              <td class="r-o">Status:</td>
+              <td>{{house.status}}</td>
+            </tr>
+            <tr>
+              <td class="r-o">Host:</td>
+              <td>{{customer.username}}</td>
+            </tr>
+            <tr>
+              <td class="r-o">Phone:</td>
+              <td>{{customer.phone}}</td>
+            </tr>
+            <tr>
+              <td class="r-o">Services:</td>
+              <td>Wifi, Television, Bathroom,...</td>
+            </tr>
+            </tbody>
+          </table>
+          <p class="f-para">{{house.description}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<br>
+<br>
+<hr>
+<app-footer></app-footer>

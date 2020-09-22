@@ -157,20 +157,20 @@
       <div class="col-lg-4">
         <div class="room-booking">
           <h3>Your Reservation</h3>
-          <form action="#" [formGroup]="formBill" (ngSubmit)="addBill()">
+          <form >
             <div class="check-date">
               <label for="date-in">Check In:</label>
-              <input type="date" class="date-input hasDatepicker" id="date-in" formControlName="checkIn">
-              <i class="icon_calendar"></i>
+              <input type="date"  id="date-in" >
+
             </div>
             <div class="check-date">
               <label for="date-out">Check Out:</label>
-              <input type="date" class="date-input hasDatepicker" id="date-out" formControlName="checkOut">
-              <i class="icon_calendar"></i>
+              <input type="date"  id="date-out" >
+
             </div>
             <div class="select-option">
               <label for="guest">Guests:</label>
-              <select id="guest" formControlName="order">
+              <select id="guest" >
                 <option value="1">1 Adults</option>
                 <option value="2">2 Adults</option>
                 <option value="3">3 Adults</option>

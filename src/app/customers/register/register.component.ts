@@ -39,8 +39,16 @@ export class RegisterComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern(this.phonePattern), Validators.maxLength(10)]],
       address: ['', [Validators.required, Validators.maxLength(30)]],
       password: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(6)]],
-      inputFile: ['', Validators.required]
-    });
+      inputFile: ['', ],
+      confirmPassword: ['', [Validators.required, Validators.maxLength(20), Validators.minLength(6)]]
+    }, {validator: this.comparePassword});
+  }
+  comparePassword(group: FormGroup) {
+    let pass: string;
+    pass = group.get('password').value;
+    let confirmPass: string;
+    confirmPass = group.get('confirmPassword').value;
+    return (pass === confirmPass) ? null : {notSame: true};
   }
 
   // tslint:disable-next-line:typedef
@@ -71,6 +79,9 @@ export class RegisterComponent implements OnInit {
   // tslint:disable-next-line:typedef
   get password() {
     return this.registerForm.get('password');
+  }
+  get confirmPassword() {
+    return this.registerForm.get('confirmPassword');
   }
 
 

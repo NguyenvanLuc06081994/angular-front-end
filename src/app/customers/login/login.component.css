@@ -134,3 +134,6 @@ body {
     color: #777;
   }
 }
+.form-signin input{
+  padding: 0 15px ;
+}

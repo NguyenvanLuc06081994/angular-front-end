@@ -7,6 +7,7 @@ import {LoginService} from '../../services/login.service';
 import {AuthService} from '../../services/auth.service';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
+import {ToastrService} from "ngx-toastr";
 
 
 
@@ -24,7 +25,8 @@ export class AddComponent implements OnInit {
               private authService: AuthService,
               private loginService: LoginService,
               private storage: AngularFireStorage,
-              private customerService: CustomerService) {
+              private customerService: CustomerService,
+              private toast: ToastrService) {
   }
 
   // tslint:disable-next-line:typedef
@@ -71,7 +73,7 @@ export class AddComponent implements OnInit {
       type_room: [''],
       bedroom: ['', [Validators.required, Validators.min(1)]],
       bathroom: ['', [Validators.required, Validators.min(1)]],
-      description: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(250)]],
+      description: ['', [Validators.required,  Validators.maxLength(250)]],
       status: [''],
       price: ['', [Validators.required]],
       image: ['']
@@ -86,7 +88,9 @@ export class AddComponent implements OnInit {
     console.log(house);
     this.houseService.addHouse(house).subscribe(data => {
       this.router.navigate(['/home/list']);
+      this.showSuccess();
     });
+
   }
   // tslint:disable-next-line:typedef
   upload(event) {
@@ -108,6 +112,11 @@ export class AddComponent implements OnInit {
   list()
   {
     this.router.navigate(['home']);
+  }
+
+  showSuccess()
+  {
+    this.toast.success('Add New House Success!!', 'Alert');
   }
 
 }

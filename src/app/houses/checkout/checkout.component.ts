@@ -6,6 +6,8 @@ import {BillService} from '../../services/bill.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {DataService} from '../../services/data.service';
+import {ToastrService} from "ngx-toastr";
+
 
 @Component({
   selector: 'app-checkout',
@@ -60,8 +62,8 @@ export class CheckoutComponent implements OnInit {
               private billService: BillService,
               private fb: FormBuilder,
               private authService: AuthService,
-              private dataService: DataService) {
-  }
+              private dataService: DataService,
+              private toast: ToastrService) { }
 
   id = +this.route.snapshot.paramMap.get('id');
 
@@ -130,7 +132,14 @@ export class CheckoutComponent implements OnInit {
     // console.log(this.house);
     this.houseService.updateStatus(+this.house.id, this.house).subscribe(page => {
       this.router.navigate(['/home']);
+      this.showSuccess();
     });
+
+  }
+
+  showSuccess()
+  {
+    this.toast.success('Checkout Success!!', 'Alert');
   }
 
 }

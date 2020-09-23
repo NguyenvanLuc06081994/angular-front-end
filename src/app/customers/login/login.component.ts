@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../services/login.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
               private router: Router,
               private fb: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private toast: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', JSON.stringify(next.token));
         localStorage.setItem('userLogin', JSON.stringify(next.user));
         this.router.navigate(['home']);
+        this.showSuccess();
       } else {
         this.router.navigate(['login']);
       }
@@ -50,5 +53,10 @@ export class LoginComponent implements OnInit {
 
   get email(): any {
     return this.signForm.get('email');
+  }
+
+  showSuccess()
+  {
+    this.toast.success('Welcome!!','Welcome To Sona!')
   }
 }

@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {finalize} from 'rxjs/operators';
+import {ToastrService} from "ngx-toastr";
 
 // @ts-ignore
 @Component({
@@ -25,7 +26,8 @@ export class RegisterComponent implements OnInit {
               private router: Router,
               private fb: FormBuilder,
               private http: HttpClient,
-              private storage: AngularFireStorage) {
+              private storage: AngularFireStorage,
+              private toast: ToastrService) {
   }
 
   // @ts-ignore
@@ -98,5 +100,11 @@ export class RegisterComponent implements OnInit {
     this.registerService.register(this.registerForm.value).subscribe(data => {
       this.router.navigate(['login']);
     });
+    this.showSuccess();
+  }
+
+  showSuccess()
+  {
+    this.toast.success('Register Success!!', 'Alert');
   }
 }

@@ -22,6 +22,8 @@ import {FooterComponent} from './layouts/footer/footer.component';
 import {BillComponent} from './houses/bill/bill.component';
 import { CheckoutComponent } from './houses/checkout/checkout.component';
 import { BillListComponent } from './bill-list/bill-list.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ToastrModule} from "ngx-toastr";
 
 
 
@@ -48,7 +50,11 @@ import { BillListComponent } from './bill-list/bill-list.component';
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+    }),
 
   ],
   providers: [AngularFirestoreModule, AngularFireStorage],

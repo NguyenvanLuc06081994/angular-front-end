@@ -73,7 +73,7 @@ export class AddComponent implements OnInit {
       type_room: [''],
       bedroom: ['', [Validators.required, Validators.min(1)]],
       bathroom: ['', [Validators.required, Validators.min(1)]],
-      description: ['', [Validators.required, Validators.minLength(30), Validators.maxLength(250)]],
+      description: ['', [Validators.required,  Validators.maxLength(250)]],
       status: [''],
       price: ['', [Validators.required]],
       image: ['']

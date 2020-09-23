@@ -35,20 +35,21 @@
           </div>
          <div class="check-date">
            <label>Your Full Name:</label>
-           <input type="text">
+           <input type="text" [value]="fullName">
          </div>
           <div class="check-date">
             <label>Your Phone:</label>
-            <input type="number">
+            <input type="text" [value]="phone">
           </div>
           <div class="check-date">
             <label>Your Email:</label>
-            <input type="email">
+            <input type="text" [value]="email">
+
           </div>
           <div class="select-option">
             <label for="guest">Ordered:</label>
             <select id="guest"  formControlName="order">
-              <option value="1 Adults">1 Adults</option>
+              <option value="1 Adults" [selected]="true">1 Adults</option>
               <option value="2 Adults">2 Adults</option>
               <option value="3 Adults">3 Adults</option>
               <option value="4 Adults">4 Adults</option>
@@ -63,8 +64,8 @@
 <!--            </div>-->
           </div>
           <div class="check-date">
-            <label>Special Request</label>
-            <textarea type="text" style="width: 100%; height: 132px" formControlName="description"></textarea>
+            <label>ToTal Price</label>
+                <strong>{{totalPrice}}</strong>
           </div>
 
           <button type="submit">Booking</button>

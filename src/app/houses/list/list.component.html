@@ -26,9 +26,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6" *ngFor="let house of listHouse">
+        <a href="" [routerLink]="['/home/detail',house.id]">
         <div >
           <div class="room-item">
-            <img src="{{house.image}}" alt="" style="width: 15git0px; height: 350px">
+            <img src="{{house.image}}" alt="" style="width: 150px; height: 350px">
             <div class="ri-text">
               <h4>{{house.name}}</h4>
               <h3>{{house.price}} VNĐ<span>/Pernight</span></h3>
@@ -64,6 +65,7 @@
             </div>
           </div>
         </div>
+        </a>
       </div>
 
 

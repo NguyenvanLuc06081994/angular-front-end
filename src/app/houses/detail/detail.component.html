@@ -10,7 +10,7 @@
           <div class="bt-option">
             <a [routerLink]="['/home']">Home</a>
             <a [routerLink]="['/home/list']"><span>Rooms</span></a>
-              <span>{{house.name}}</span>
+            <span>{{house.name}}</span>
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
 <section class="room-details-section spad">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8" >
+      <div class="col-lg-8">
         <div class="room-details-item">
           <img src="{{house.image}}" alt="">
           <div class="rd-text">
@@ -147,7 +147,7 @@
                     <i class="icon_star-half_alt"></i>
                   </div>
                 </div>
-                  <textarea placeholder="Your Review"></textarea>
+                <textarea placeholder="Your Review"></textarea>
                 <button type="submit">Submit Now</button>
               </div>
             </div>
@@ -157,20 +157,19 @@
       <div class="col-lg-4">
         <div class="room-booking">
           <h3>Your Reservation</h3>
-          <form >
+          <form [formGroup]="detailForm" (ngSubmit)="add()">
             <div class="check-date">
               <label for="date-in">Check In:</label>
-              <input type="date"  id="date-in" >
+              <input type="date" formControlName="checkIn" id="date-in">
 
             </div>
             <div class="check-date">
               <label for="date-out">Check Out:</label>
-              <input type="date"  id="date-out" >
-
+              <input type="date" formControlName="checkOut" id="date-out">
             </div>
             <div class="select-option">
               <label for="guest">Guests:</label>
-              <select id="guest" >
+              <select id="guest" formControlName="order">
                 <option value="1">1 Adults</option>
                 <option value="2">2 Adults</option>
                 <option value="3">3 Adults</option>
@@ -178,12 +177,12 @@
               </select>
             </div>
             <div class="select-option">
-              <label for="room">Room:</label>
+              <label for="room">House:</label>
               <select id="room">
-                <option value="">1 Room</option>
+                <option value="">5 Room</option>
               </select>
             </div>
-            <button>Check Availability</button>
+            <button [routerLink]="['/home/checkout',house.id]">Check Availability</button>
           </form>
         </div>
       </div>

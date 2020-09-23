@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HouseService} from '../../services/house.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../services/customer.service';
-import {BillService} from "../../services/bill.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {AuthService} from "../../services/auth.service";
+import {BillService} from '../../services/bill.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
+import {DataService} from '../../services/data.service';
 
 @Component({
   selector: 'app-checkout',
@@ -45,6 +46,12 @@ export class CheckoutComponent implements OnInit {
 
   formCheckout: FormGroup;
   userLogin;
+  formDetail;
+  fullName;
+  phone;
+  email;
+  Adults = '1 Adults';
+  totalPrice;
 
   constructor(private houseService: HouseService,
               private router: Router,
@@ -52,12 +59,21 @@ export class CheckoutComponent implements OnInit {
               private customerService: CustomerService,
               private billService: BillService,
               private fb: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private dataService: DataService) {
   }
 
   id = +this.route.snapshot.paramMap.get('id');
 
   ngOnInit(): void {
+    const userLogin = this.authService.getUserLogin();
+    // @ts-ignore
+    this.fullName = userLogin.username;
+    // @ts-ignore
+    this.phone = userLogin.phone;
+    // @ts-ignore
+    this.email = userLogin.email;
+    console.log(userLogin);
     this.formCheckout = this.fb.group({
       checkIn: [''],
       checkOut: [''],
@@ -65,6 +81,10 @@ export class CheckoutComponent implements OnInit {
       description: ['']
     });
     this.getHouse();
+    this.dataService.dataShare.subscribe(result => {
+      this.formDetail = result;
+      console.log(result);
+    });
   }
 
   // tslint:disable-next-line:typedef
@@ -97,6 +117,8 @@ export class CheckoutComponent implements OnInit {
     const result = getDateCheckOut - getDateCheckIn;
     // @ts-ignore
     this.bill.totalPrice = result * this.house.price;
+    // @ts-ignore
+    this.totalPrice = result * this.house.price;
     console.log(this.bill);
     this.bill.status = 'pending';
     this.bill.order = this.formCheckout.value.order;
@@ -105,7 +127,7 @@ export class CheckoutComponent implements OnInit {
     console.log(this.bill);
     this.billService.addBill(this.bill).subscribe(data => {
     });
-    console.log(this.house);
+    // console.log(this.house);
     this.houseService.updateStatus(+this.house.id, this.house).subscribe(page => {
       this.router.navigate(['/home']);
     });

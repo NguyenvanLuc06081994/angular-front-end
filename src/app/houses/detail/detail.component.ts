@@ -1,13 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {IHouse} from '../../interfaces/ihouse';
 import {HouseService} from '../../services/house.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../services/customer.service';
-import {ICustomer} from '../../interfaces/icustomer';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {BillService} from '../../services/bill.service';
 import {AuthService} from '../../services/auth.service';
-import {IBill} from '../../interfaces/ibill';
+import {DataService} from '../../services/data.service';
 
 @Component({
   selector: 'app-detail',
@@ -32,8 +30,8 @@ export class DetailComponent implements OnInit {
   customer: any = {
     username: ''
   };
-
-
+  detailForm: FormGroup;
+  dataService: any;
 
   constructor(private houseService: HouseService,
               private router: Router,
@@ -47,8 +45,13 @@ export class DetailComponent implements OnInit {
 
   id = +this.route.snapshot.paramMap.get('id');
 
-  ngOnInit(): void {
-
+  // @ts-ignore
+  ngOnInit(private dataService: DataService): void {
+    this.detailForm = this.fb.group({
+      checkIn: [''],
+      checkOut: [''],
+      order: ['']
+    });
     this.getHouse();
   }
 
@@ -62,8 +65,11 @@ export class DetailComponent implements OnInit {
         this.customer = result.user;
       });
     });
-
   }
 
+  add(): any {
+    const data = this.detailForm.value;
+    this.dataService.addData(data);
+  }
 
 }

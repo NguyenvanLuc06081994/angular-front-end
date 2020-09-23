@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "upload-image-edb81": {
+      "hosting": {
+        "home-template": [
+          "upload-image-edb81"
+        ]
+      }
+    }
+  }
+}

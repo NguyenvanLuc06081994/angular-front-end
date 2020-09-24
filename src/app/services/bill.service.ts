@@ -18,6 +18,11 @@ export class BillService extends HttpBaseService {
   }
 
   getBillByUserId(id: number): Observable<any> {
-    return this.http.get(environment.url + '/bills/' + id, {headers: this.getHeaders()});
+    return this.http.get(environment.url + '/bills/searchbyci/' + id, {headers: this.getHeaders()});
+  }
+
+  getBillByHouseId(id: number): Observable<any>
+  {
+    return this.http.get(environment.url + '/bills/searchbyhi/' + id, {headers: this.getHeaders()});
   }
 }

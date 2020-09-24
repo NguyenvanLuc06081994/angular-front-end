@@ -25,6 +25,7 @@ import { BillListComponent } from './bill-list/bill-list.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
 import { ProfileComponent } from './customers/profile/profile.component';
+import { PasswordComponent } from './customers/password/password.component';
 
 
 
@@ -43,7 +44,8 @@ import { ProfileComponent } from './customers/profile/profile.component';
     BillComponent,
     CheckoutComponent,
     BillListComponent,
-    ProfileComponent
+    ProfileComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,

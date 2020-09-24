@@ -11,6 +11,7 @@ import {AddComponent} from './houses/add/add.component';
 import {DetailComponent} from './houses/detail/detail.component';
 import {CheckoutComponent} from './houses/checkout/checkout.component';
 import {BillListComponent} from './bill-list/bill-list.component';
+import {ProfileComponent} from './customers/profile/profile.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -25,6 +26,7 @@ const routes: Routes = [
       {path: 'add', component: AddComponent},
       {path: 'detail/:id', component: DetailComponent },
       {path: 'checkout/:id', component: CheckoutComponent },
+      {path: 'profile/:id', component: ProfileComponent},
     ],
     canActivate: [IsAuthenGuard]
   },

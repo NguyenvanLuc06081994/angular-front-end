@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
 import {AuthService} from '../../services/auth.service';
 import {HouseService} from '../../services/house.service';
+import {CustomerService} from '../../services/customer.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,16 +11,22 @@ import {HouseService} from '../../services/house.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  user;
   userLoginCurrent;
   houses;
 
   constructor(private router: Router,
               private authService: AuthService,
-              private houseService: HouseService) {
+              private houseService: HouseService,
+              private customerService: CustomerService) {
   }
 
   ngOnInit(): void {
-    this.userLoginCurrent = this.authService.getUserLogin();
+    this.user = this.authService.getUserLogin();
+    this.customerService.getCustomerById(this.user.id).subscribe(data=>{
+      // @ts-ignore
+      this.userLoginCurrent = data.user;
+    })
     this.houseService.getAllHouse().subscribe(data => {
       this.houses = data;
     });

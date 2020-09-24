@@ -24,7 +24,12 @@ import { CheckoutComponent } from './houses/checkout/checkout.component';
 
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+
 import { BListComponent } from './bills/b-list/b-list.component';
+
+import { ProfileComponent } from './customers/profile/profile.component';
+import { PasswordComponent } from './customers/password/password.component';
+
 
 
 
@@ -41,7 +46,11 @@ import { BListComponent } from './bills/b-list/b-list.component';
     DetailComponent,
     FooterComponent,
     CheckoutComponent,
+
     BListComponent,
+
+    ProfileComponent,
+    PasswordComponent
 
   ],
   imports: [

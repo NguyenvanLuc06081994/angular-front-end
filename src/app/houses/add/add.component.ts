@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {HouseService} from '../../services/house.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,8 +8,8 @@ import {AuthService} from '../../services/auth.service';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {ToastrService} from "ngx-toastr";
-
-
+import {ImageService} from "../../services/image.service";
+import {ImagePayload} from "../../model/images/image.component";
 
 
 @Component({
@@ -18,6 +18,8 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+  houseAdd;
+
   constructor(private fb: FormBuilder,
               private houseService: HouseService,
               private router: Router,
@@ -26,14 +28,17 @@ export class AddComponent implements OnInit {
               private loginService: LoginService,
               private storage: AngularFireStorage,
               private customerService: CustomerService,
-              private toast: ToastrService) {
+              private toast: ToastrService,
+              private imageService: ImageService) {
   }
 
   // tslint:disable-next-line:typedef
-  get name()
-  {
+  get name() {
     return this.addHouseForm.get('name');
   }
+
+
+
   get typeHouse()
   {
     return this.addHouseForm.get('type_house');
@@ -42,88 +47,144 @@ export class AddComponent implements OnInit {
   {
     return this.addHouseForm.get('type_room')
   }
+
   // tslint:disable-next-line:typedef
-  get address()
-  {
+  get address() {
     return this.addHouseForm.get('address');
   }
+
   // tslint:disable-next-line:typedef
-  get bedroom()
-  {
+  get bedroom() {
     return this.addHouseForm.get('bedroom');
   }
+
   // tslint:disable-next-line:typedef
-  get bathroom()
-  {
+  get bathroom() {
     return this.addHouseForm.get('bathroom');
   }
+
   // tslint:disable-next-line:typedef
-  get price()
-  {
+  get price() {
     return this.addHouseForm.get('price');
   }
+
   // tslint:disable-next-line:typedef
-  get description()
-  {
+  get description() {
     return this.addHouseForm.get('description');
   }
+
   addHouseForm: FormGroup;
   customerLogin;
   downloadURL: string;
-
+  files = [];
+  a;
 
 
   ngOnInit(): void {
     this.addHouseForm = this.fb.group({
+
       name : ['', [Validators.maxLength(120), Validators.minLength(6), Validators.required]],
       address: ['', [Validators.required,  Validators.maxLength(250)]],
       type_house: ['',Validators.required],
       type_room: ['',Validators.required],
       bedroom: ['', [Validators.required, Validators.min(1)]],
       bathroom: ['', [Validators.required, Validators.min(1)]],
-      description: ['', [Validators.required,  Validators.maxLength(250)]],
+      description: ['', [Validators.required, Validators.maxLength(250)]],
       status: [''],
       price: ['', [Validators.required]],
-      image: ['']
     });
     this.customerLogin = this.authService.getUserLogin();
   }
+
   // tslint:disable-next-line:typedef
-  addSubmit()
-  {
+  addSubmit() {
     const house = this.addHouseForm.value;
     house.customer_id = this.customerLogin.id;
-    console.log(house);
+
     this.houseService.addHouse(house).subscribe(data => {
+      this.houseAdd = data;
+      console.log(data);
+      for (let i = 0; i < this.files.length; i++) {
+        this.upload(i, this.files[i], this.houseAdd.id, this.files.length);
+        console.log(1);
+      }
       this.router.navigate(['/home/list']);
       this.showSuccess();
     });
-
   }
-  // tslint:disable-next-line:typedef
-  upload(event) {
-    const file = event.target.files[0];
-    const filePath = file.name;
-    let fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
 
+  onSelect(event): void {
+    this.files.push(...event.addedFiles);
+  }
+
+  onRemove(event): void {
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  uploadPercents = [];
+
+  upload(i: number, file: File, houseId: number, size: number): void {
+    const filePath = `houses/${Date.now()}`;
+    const task = this.storage.upload(filePath, file);
+    let fileRef = this.storage.ref(filePath);
+    this.uploadPercents[i] = task.percentageChanges();
     task.snapshotChanges().pipe(
       finalize(() => fileRef.getDownloadURL().subscribe(
         url => {
+          const image = new ImagePayload();
+          image.house_id = houseId;
           this.downloadURL = url;
-          this.addHouseForm.value.image = url;
+          image.ref = url;
+          this.imageService.addHouseImage(image).subscribe(data => {
+            this.a = data;
+            console.log(this.a);
+            if (i === size - 1) {
+              this.router.navigate(['/home/list'], {
+                queryParams: {created: 'true'},
+              });
+            }
+          });
         }))
-    )
-      .subscribe();
+    ).subscribe();
+    // task.snapshotChanges().pipe(
+    //   finalize(() => {
+    //
+    //
+    //
+    //     console.log(image);
+
+    //     if (i === size - 1){
+    //       this.router.navigate(['/home/list'], {
+    //         queryParams: { created: 'true' },
+    //       });
+    //     }
+    //   })
+    // )
+
   }
+
+
+  // upload(event) {
+  //   const file = event.target.files[0];
+  //   const filePath = file.name;
+  //   let fileRef = this.storage.ref(filePath);
+  //   const task = this.storage.upload(filePath, file);
+  //
+  //   task.snapshotChanges().pipe(
+  //     finalize(() => fileRef.getDownloadURL().subscribe(
+  //       url => {
+  //         this.downloadURL = url;
+  //         this.addHouseForm.value.image = url;
+  //       }))
+  //   )
+  //     .subscribe();
+  // }
   // tslint:disable-next-line:typedef
-  list()
-  {
+  list() {
     this.router.navigate(['home']);
   }
 
-  showSuccess()
-  {
+  showSuccess() {
     this.toast.success('Add New House Success!!', 'Alert');
   }
 

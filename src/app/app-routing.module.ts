@@ -19,7 +19,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'billDetail/:id', component: BillListComponent},
-
+  {path: 'password/:id', component: PasswordComponent},
+  {path: 'profile/:id', component: ProfileComponent},
   {
     path: 'home',
     children: [
@@ -28,8 +29,8 @@ const routes: Routes = [
       {path: 'add', component: AddComponent},
       {path: 'detail/:id', component: DetailComponent },
       {path: 'checkout/:id', component: CheckoutComponent },
-      {path: 'profile/:id', component: ProfileComponent},
-      {path: 'password/:id', component: PasswordComponent},
+
+
     ],
     canActivate: [IsAuthenGuard]
   },

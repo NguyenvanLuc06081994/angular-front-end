@@ -19,13 +19,17 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {AddComponent} from './houses/add/add.component';
 import {DetailComponent} from './houses/detail/detail.component';
 import {FooterComponent} from './layouts/footer/footer.component';
-import {BillComponent} from './houses/bill/bill.component';
+
 import { CheckoutComponent } from './houses/checkout/checkout.component';
-import { BillListComponent } from './bill-list/bill-list.component';
+
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+
+import { BListComponent } from './bills/b-list/b-list.component';
+
 import { ProfileComponent } from './customers/profile/profile.component';
 import { PasswordComponent } from './customers/password/password.component';
+
 
 
 
@@ -41,11 +45,13 @@ import { PasswordComponent } from './customers/password/password.component';
     AddComponent,
     DetailComponent,
     FooterComponent,
-    BillComponent,
     CheckoutComponent,
-    BillListComponent,
+
+    BListComponent,
+
     ProfileComponent,
     PasswordComponent
+
   ],
   imports: [
     BrowserModule,

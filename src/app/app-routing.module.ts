@@ -10,17 +10,22 @@ import {IsAuthenGuard} from './is-authen.guard';
 import {AddComponent} from './houses/add/add.component';
 import {DetailComponent} from './houses/detail/detail.component';
 import {CheckoutComponent} from './houses/checkout/checkout.component';
-import {BillListComponent} from './bill-list/bill-list.component';
+
+import {BListComponent} from "./bills/b-list/b-list.component";
+
+
 import {ProfileComponent} from './customers/profile/profile.component';
 import {PasswordComponent} from './customers/password/password.component';
+
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'billDetail/:id', component: BillListComponent},
+
   {path: 'password/:id', component: PasswordComponent},
   {path: 'profile/:id', component: ProfileComponent},
+
   {
     path: 'home',
     children: [
@@ -30,6 +35,7 @@ const routes: Routes = [
       {path: 'detail/:id', component: DetailComponent },
       {path: 'checkout/:id', component: CheckoutComponent },
 
+      {path: 'bills', component: BListComponent},
 
     ],
     canActivate: [IsAuthenGuard]

@@ -36,4 +36,9 @@ export class HouseService extends HttpBaseService {
   updateStatus(id: number, status): Observable<any> {
     return this.http.put<any>(environment.url + '/houses' + '/' + id, status, {headers: this.getHeaders()});
   }
+
+  getHouseByCustomerId(customer_id:number): Observable<any>
+  {
+    return this.http.get<any>(environment.url + '/houses/searchci' + '/' + customer_id, {headers: this.getHeaders()});
+  }
 }

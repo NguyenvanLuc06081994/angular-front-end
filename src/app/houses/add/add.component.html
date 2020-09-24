@@ -102,16 +102,29 @@
             <p class="text text-danger"> *Price required</p>
           </div>
         </div>
-
-        <div class="input-group mb-3">
-          <input type="file" class="form-control" formControlName="image" (change)="upload($event)"
-                 aria-label="imageHouse">
+        <ngx-dropzone (change)="onSelect($event)">
+          <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+          <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
+        <div *ngFor="let uploadPercent of uploadPercents" class="mb-2">
+          <div *ngIf="uploadPercent | async as pct">
+            <app-progress-bar width="{{pct}}"></app-progress-bar>
+            <span>{{pct | number}}</span>
+          </div>
+          <div></div>
         </div>
+<!--        <div class="input-group mb-3">-->
+<!--          <input type="file" class="form-control" formControlName="image" (change)="upload($event)"-->
+<!--                 aria-label="imageHouse">-->
+<!--        </div>-->
 
         <div class="row ml-1 text-center box-center">
           <button class="btn btn-info" [disabled]="addHouseForm.invalid">Add</button>
           <button (click)="list()" class="btn btn-secondary ml-3" >Cancel</button>
         </div>
+
       </form>
     </div>
   </div>

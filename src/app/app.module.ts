@@ -24,6 +24,7 @@ import { CheckoutComponent } from './houses/checkout/checkout.component';
 import { BillListComponent } from './bill-list/bill-list.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import {NgxDropzoneModule} from "ngx-dropzone";
 
 
 
@@ -55,6 +56,7 @@ import {ToastrModule} from "ngx-toastr";
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
     }),
+    NgxDropzoneModule
 
   ],
   providers: [AngularFirestoreModule, AngularFireStorage],

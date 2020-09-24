@@ -4,6 +4,7 @@ import {LoginService} from '../../services/login.service';
 import {AuthService} from '../../services/auth.service';
 import {HouseService} from '../../services/house.service';
 import {CustomerService} from '../../services/customer.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,8 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router,
               private authService: AuthService,
               private houseService: HouseService,
-              private customerService: CustomerService) {
+              private customerService: CustomerService,
+              private toast: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -36,6 +38,7 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('token');
     localStorage.removeItem('userLogin');
     this.router.navigate(['login']);
+    this.toast.success('logout success');
   }
 
 }

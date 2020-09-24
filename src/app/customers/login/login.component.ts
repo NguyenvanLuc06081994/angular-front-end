@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../services/login.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
-import {ToastrService} from "ngx-toastr";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -40,11 +40,12 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', JSON.stringify(next.token));
         localStorage.setItem('userLogin', JSON.stringify(next.user));
         this.router.navigate(['home']);
-        this.showSuccess();
+
       } else {
         this.router.navigate(['login']);
       }
     });
+    this.toast.success('Welcome!!', 'Welcome To Sona!');
   }
 
   get password(): any {
@@ -55,8 +56,7 @@ export class LoginComponent implements OnInit {
     return this.signForm.get('email');
   }
 
-  showSuccess()
-  {
-    this.toast.success('Welcome!!','Welcome To Sona!')
+  showSuccess() {
+    this.toast.success('Welcome!!', 'Welcome To Sona!');
   }
 }

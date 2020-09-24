@@ -24,6 +24,7 @@ import { CheckoutComponent } from './houses/checkout/checkout.component';
 import { BillListComponent } from './bill-list/bill-list.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ToastrModule} from "ngx-toastr";
+import { ProfileComponent } from './customers/profile/profile.component';
 
 
 
@@ -41,7 +42,8 @@ import {ToastrModule} from "ngx-toastr";
     FooterComponent,
     BillComponent,
     CheckoutComponent,
-    BillListComponent
+    BillListComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

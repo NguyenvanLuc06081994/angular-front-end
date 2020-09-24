@@ -27,9 +27,9 @@ export class PasswordComponent implements OnInit {
       this.userLogin = data.user;
       console.log(data);
       this.passwordForm = this.fb.group({
-        old_password: ['', [Validators.required, Validators.minLength(6)]],
-        new_password: ['', [Validators.required, Validators.minLength(6)]],
-        confirm_password: ['', [Validators.required, Validators.minLength(6)]]
+        old_password: ['', [Validators.required]],
+        new_password: ['', [Validators.required]],
+        confirm_password: ['', [Validators.required]]
       }, {validator: this.comparePassword});
     });
     this.user = this.authService.getUserLogin();

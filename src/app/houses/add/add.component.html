@@ -20,23 +20,34 @@
           </div>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="select-option">
           <select formControlName="type_house" aria-label="type_house" class="custom-select" id="typeHouse" >
-            <option value="Nhà Nghỉ">Nhà Nghỉ</option>
+            <option [selected]="[]">Choose Type House</option>
+            <option value="Nhà Nghỉ" >Nhà Nghỉ</option>
             <option value="Khách Sạn">Khách sạn</option>
             <option value="Homestay">Homestay</option>
             <option value="Penhouse">Penhouse</option>
           </select>
-
         </div>
-
-        <div class="input-group mb-3">
+        <div *ngIf="typeHouse.touched && typeHouse.invalid">
+          <div *ngIf="typeHouse.errors.required">
+            <p class="text text-danger"> *Type Room required</p>
+          </div>
+        </div>
+        <br>
+        <div class="select-option">
           <select formControlName="type_room" aria-label="type_room" class="custom-select"  >
-            <option value="Phòng thường">Phòng thường</option>
+            <option [selected]="[]">Choose Type Room</option>
+            <option value="Phòng thường" >Phòng thường</option>
             <option value="Phòng Vip">Phòng Vip</option>
           </select>
         </div>
-
+        <div *ngIf="typeRoom.touched && typeRoom.invalid">
+          <div *ngIf="typeRoom.errors.required">
+            <p class="text text-danger"> *Type Room required</p>
+          </div>
+        </div>
+        <br>
         <div class="input-group mb-3">
       <textarea type="text" class="form-control" formControlName="address" placeholder="Address"
                 aria-label="Address"></textarea>

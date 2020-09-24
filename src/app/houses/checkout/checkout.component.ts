@@ -3,7 +3,7 @@ import {HouseService} from '../../services/house.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../services/customer.service';
 import {BillService} from '../../services/bill.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {DataService} from '../../services/data.service';
 import {ToastrService} from 'ngx-toastr';
@@ -73,7 +73,7 @@ export class CheckoutComponent implements OnInit {
     this.formCheckout = this.fb.group({
       checkIn: [''],
       checkOut: [''],
-      order: [''],
+      order: ['',Validators.required],
       description: ['']
     });
     this.getHouse();
@@ -96,7 +96,11 @@ export class CheckoutComponent implements OnInit {
         this.email = this.customer.email;
       });
     });
+  }
 
+  get order()
+  {
+    return this.formCheckout.get('order');
   }
 
   addBill(): any {

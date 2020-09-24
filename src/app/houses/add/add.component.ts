@@ -34,6 +34,14 @@ export class AddComponent implements OnInit {
   {
     return this.addHouseForm.get('name');
   }
+  get typeHouse()
+  {
+    return this.addHouseForm.get('type_house');
+  }
+  get typeRoom()
+  {
+    return this.addHouseForm.get('type_room')
+  }
   // tslint:disable-next-line:typedef
   get address()
   {
@@ -69,8 +77,8 @@ export class AddComponent implements OnInit {
     this.addHouseForm = this.fb.group({
       name : ['', [Validators.maxLength(120), Validators.minLength(6), Validators.required]],
       address: ['', [Validators.required,  Validators.maxLength(250)]],
-      type_house: [''],
-      type_room: [''],
+      type_house: ['',Validators.required],
+      type_room: ['',Validators.required],
       bedroom: ['', [Validators.required, Validators.min(1)]],
       bathroom: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required,  Validators.maxLength(250)]],

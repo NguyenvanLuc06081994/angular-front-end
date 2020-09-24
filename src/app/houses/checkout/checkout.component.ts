@@ -3,10 +3,10 @@ import {HouseService} from '../../services/house.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../services/customer.service';
 import {BillService} from '../../services/bill.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {DataService} from '../../services/data.service';
-import {ToastrService} from "ngx-toastr";
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -69,17 +69,11 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     const userLogin = this.authService.getUserLogin();
-    // @ts-ignore
-    this.fullName = userLogin.username;
-    // @ts-ignore
-    this.phone = userLogin.phone;
-    // @ts-ignore
-    this.email = userLogin.email;
     console.log(userLogin);
     this.formCheckout = this.fb.group({
       checkIn: [''],
       checkOut: [''],
-      order: [''],
+      order: ['',Validators.required],
       description: ['']
     });
     this.getHouse();
@@ -89,17 +83,24 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  // tslint:disable-next-line:typedef
   getHouse() {
+    const user = this.authService.getUserLogin();
     this.houseService.getHouseId(this.id).subscribe(data => {
       this.house = data;
       // @ts-ignore
-      this.customerService.getCustomerById(this.house.customer_id).subscribe(result => {
+      this.customerService.getCustomerById(user.id).subscribe(result => {
         // @ts-ignore
         this.customer = result.user;
+        this.fullName = this.customer.username;
+        this.phone = this.customer.phone;
+        this.email = this.customer.email;
       });
     });
+  }
 
+  get order()
+  {
+    return this.formCheckout.get('order');
   }
 
   addBill(): any {

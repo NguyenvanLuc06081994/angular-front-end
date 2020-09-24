@@ -82,13 +82,10 @@
               <img src="{{userLoginCurrent.image}}" alt="">
               <span>{{userLoginCurrent.username}} <i class="fa fa-angle-down"></i></span>
               <div class="flag-dropdown">
-                <ul *ngIf="userLoginCurrent">
-                  <div *ngFor="let house of houses">
-                    <li  *ngIf="house.customer_id == userLoginCurrent.id">
-                      <a href="#" [routerLink]="['/billDetail', userLoginCurrent.id]">List Bill</a>
-                    </li>
-                  </div>
+                <ul>
+                  <li><a [routerLink]="['/home/bills']">Bill</a></li>
                   <li><a [routerLink]="['/home/add']">Add Home</a></li>
+                  <li><a href="" [routerLink]="['profile', userLoginCurrent.id]">Change Your Profile</a></li>
                   <li><a href="" (click)="logout()">Logout</a></li>
                 </ul>
               </div>

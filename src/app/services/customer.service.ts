@@ -34,5 +34,13 @@ export class CustomerService extends HttpBaseService {
     return this.http.get<ICustomer>(environment.url + '/customers' + '/' + id, {headers: this.getHeaders()});
   }
 
+  changeProfile(id: number, data): Observable<any> {
+    return this.http.put(environment.url + '/customers' + '/' + id, data, {headers: this.getHeaders()});
+  }
+
+  changePassword(id: number, data): Observable<any> {
+    return this.http.post(environment.url + '/changePassword' + '/' + id, data, {headers: this.getHeaders()});
+  }
+
 
 }

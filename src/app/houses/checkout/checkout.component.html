@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+
 
 <!-- Breadcrumb Section Begin -->
 <div class="breadcrumb-section">
@@ -49,26 +49,24 @@
           <div class="select-option">
             <label for="guest">Ordered:</label>
             <select id="guest"  formControlName="order">
-              <option value="1 Adults" [selected]="true">1 Adults</option>
+              <option value="" [selected]="[]">Choose</option>
+              <option value="1 Adults">1 Adults</option>
               <option value="2 Adults">2 Adults</option>
               <option value="3 Adults">3 Adults</option>
               <option value="4 Adults">4 Adults</option>
             </select>
-<!--            <div class="nice-select" tabindex="0">-->
-
-<!--              <span class="current" formControlName="order">I am the main residence</span>-->
-<!--              <ul class="list">-->
-<!--                <li data-value class="option">I am the main residence</li>-->
-<!--                <li data-value class="option">For someone else</li>-->
-<!--              </ul>-->
-<!--            </div>-->
+            <div *ngIf="order.touched && order.invalid">
+              <div *ngIf="order.errors.required">
+                <p class="text text-danger"> *Order required</p>
+              </div>
+            </div>
           </div>
           <div class="check-date">
             <label>ToTal Price</label>
                 <strong>{{totalPrice}}</strong>
           </div>
 
-          <button type="submit">Booking</button>
+          <button type="submit" [disabled]="formCheckout.invalid">Booking</button>
         </form>
       </div>
     </div>
@@ -129,4 +127,4 @@
 <br>
 <br>
 <hr>
-<app-footer></app-footer>
+

@@ -25,10 +25,10 @@
                 <div *ngIf="password.errors.required">
                   <p class="text text-danger"> *Password required</p>
                 </div>
-                <div *ngIf="password.errors.maxlength">
+                <div *ngIf="password.errors.maxLength">
                   <p class="text text-danger"> *Password no more than 20 character</p>
                 </div>
-                <div *ngIf="password.errors.minlength">
+                <div *ngIf="password.errors.minLength">
                   <p class="text text-danger"> *Password no less than 6 character</p>
                 </div>
               </div>

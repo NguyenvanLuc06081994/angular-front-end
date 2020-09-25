@@ -29,5 +29,37 @@
       </tr>
       </tbody>
     </table>
+    <br>
+    <h1 class="text-center"> Host Bill </h1>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Customer Book</th>
+        <th scope="col">House Name</th>
+        <th scope="col">CheckIn</th>
+        <th scope="col">CheckOut</th>
+        <th scope="col">Status</th>
+        <th scope="col">People</th>
+
+        <th scope="col">TotalPrice</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let bill of billHostNew; let i = index">
+        <td>{{i+1}}</td>
+        <!--        <td>{{customerOder[i].username}}</td>-->
+        <td></td>
+        <td>{{bill.house.name}}</td>
+        <td>{{bill.checkIn}}</td>
+        <td>{{bill.checkOut}}</td>
+        <td>{{bill.status}}</td>
+        <td>{{bill.order}}</td>
+        <td>{{bill.totalPrice}}</td>
+        <td ></td>
+
+      </tr>
+      </tbody>
+    </table>
   </div>
 </div>

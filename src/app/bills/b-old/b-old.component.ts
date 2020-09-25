@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {CustomerService} from "../../services/customer.service";
 import {IBill} from "../../interfaces/ibill";
+import {IHouse} from "../../interfaces/ihouse";
+import {ICustomer} from "../../interfaces/icustomer";
 
 @Component({
   selector: 'app-b-old',
@@ -16,6 +18,11 @@ export class BOldComponent implements OnInit {
   userLogin;
   billOder;
   billOderOld: IBill[] =[];
+  billHouse;
+  billHostOld:IHouse[]=[];
+  houses;
+  customerBook;
+  customerOder:ICustomer[]=[];
 
   constructor(private billService: BillService,
               private houseService: HouseService,
@@ -39,6 +46,34 @@ export class BOldComponent implements OnInit {
           this.billOderOld.push(this.billOder[i]);
         }
       }
+    });
+    this.getHostHouse();
+  }
+
+  getHostHouse()
+  {
+    this.houseService.getHouseByCustomerId(this.userLogin.id).subscribe(data => {
+      this.houses = data;
+      for (let i = 0; i < this.houses.length; i++)
+      {
+        this.billService.getBillByHouseId(this.houses[i].id).subscribe(house => {
+          this.billHouse = house;
+          console.log(this.billHouse);
+          if ((this.billHouse != 0)&&(this.billHouse[0].status == 'done')) {
+            // @ts-ignore
+            this.billHostOld.push(this.billHouse[0]);
+
+            this.customerService.getCustomerById(this.billHouse[0].customer_id).subscribe(customer=>{
+              this.customerBook = customer;
+              this.customerOder.push(this.customerBook['user']) ;
+
+            });
+
+          }
+        });
+      }
+      console.log(this.billHostOld);
+      console.log(this.customerOder);
     });
   }
 

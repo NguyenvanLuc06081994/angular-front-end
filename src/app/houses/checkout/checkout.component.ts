@@ -79,7 +79,7 @@ export class CheckoutComponent implements OnInit {
     this.getHouse();
     this.dataService.dataShare.subscribe(result => {
       this.formDetail = result;
-      console.log(result);
+
     });
   }
 
@@ -126,7 +126,6 @@ export class CheckoutComponent implements OnInit {
     this.bill.status = 'pending';
     this.bill.order = this.formCheckout.value.order;
     this.bill.description = this.formCheckout.value.description;
-    this.house.status = 'dang cho thue';
     console.log(this.bill);
     this.billService.addBill(this.bill).subscribe(data => {
     });

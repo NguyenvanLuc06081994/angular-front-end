@@ -30,6 +30,8 @@ import { BListComponent } from './bills/b-list/b-list.component';
 
 import { ProfileComponent } from './customers/profile/profile.component';
 import { PasswordComponent } from './customers/password/password.component';
+import { BNewComponent } from './bills/b-new/b-new.component';
+import { BOldComponent } from './bills/b-old/b-old.component';
 
 
 
@@ -51,7 +53,9 @@ import { PasswordComponent } from './customers/password/password.component';
     BListComponent,
 
     ProfileComponent,
-    PasswordComponent
+    PasswordComponent,
+    BNewComponent,
+    BOldComponent
 
   ],
   imports: [

@@ -1,30 +1,30 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {BillService} from "../../services/bill.service";
 import {HouseService} from "../../services/house.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
-import {DataService} from "../../services/data.service";
-import {ToastrService} from "ngx-toastr";
 import {CustomerService} from "../../services/customer.service";
-import {IHouse} from "../../interfaces/ihouse";
-import {ICustomer} from "../../interfaces/icustomer";
 import {IBill} from "../../interfaces/ibill";
+import {ICustomer} from "../../interfaces/icustomer";
+import {IHouse} from "../../interfaces/ihouse";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
-  selector: 'app-b-list',
-  templateUrl: './b-list.component.html',
-  styleUrls: ['./b-list.component.css']
+  selector: 'app-b-new',
+  templateUrl: './b-new.component.html',
+  styleUrls: ['./b-new.component.css']
 })
-export class BListComponent implements OnInit {
-  billOder;
-  customerBook;
-  houses;
+export class BNewComponent implements OnInit {
+
   userLogin;
-  bills;
-  billHost:IHouse[]=[];
-  customerOder:ICustomer[]=[];
-  billHouse;
+  billOder;
   billOderNew: IBill[] =[];
+  billHouse;
+  billHostNew:IHouse[]=[];
+  houses;
+  customerBook;
+  customerOder:ICustomer[]=[];
+
 
 
   constructor(private billService: BillService,
@@ -34,27 +34,24 @@ export class BListComponent implements OnInit {
               private authService: AuthService,
               private customerService: CustomerService,
               private toast: ToastrService) {
+
   }
 
   id = +this.route.snapshot.paramMap.get('id');
-
-
   ngOnInit(): void {
-    // this.userLogin = this.authService.getUserLogin();
-    // console.log(this.userLogin.id);
-    // this.billService.getBillByUserId(this.userLogin.id).subscribe(data => {
-    //   this.billOder = data;
-    //   console.log(this.billOder);
-    //   for(let i =0;i<this.billOder.length;i++)
-    //   {
-    //     if(this.billOder[i].status == 'pending')
-    //     {
-    //       this.billOderNew.push(this.billOder[i]);
-    //     }
-    //   }
-    //
-    // });
-    // this.getHostHouse();
+    this.userLogin = this.authService.getUserLogin();
+    console.log(this.userLogin);
+    this.billService.getBillByUserId(this.userLogin.id).subscribe(bills=>{
+      this.billOder = bills;
+      for(let i =0; i<this.billOder.length;i++)
+      {
+        if(this.billOder[i].status == 'pending')
+        {
+            this.billOderNew.push(this.billOder[i]);
+        }
+      }
+    });
+    this.getHostHouse();
   }
 
   getHostHouse()
@@ -66,9 +63,9 @@ export class BListComponent implements OnInit {
         this.billService.getBillByHouseId(this.houses[i].id).subscribe(house => {
           this.billHouse = house;
           console.log(this.billHouse);
-          if (this.billHouse != 0) {
+          if ((this.billHouse != 0)&&(this.billHouse[0].status == 'pending')) {
             // @ts-ignore
-            this.billHost.push(this.billHouse[0]);
+            this.billHostNew.push(this.billHouse[0]);
 
             this.customerService.getCustomerById(this.billHouse[0].customer_id).subscribe(customer=>{
               this.customerBook = customer;
@@ -79,10 +76,20 @@ export class BListComponent implements OnInit {
           }
         });
       }
-      console.log(this.billHost);
-      console.log(this.customerOder);
     });
   }
 
+  cancelBillOrder(index)
+  {
+    let bill = this.billOderNew[index];
+    if(confirm('Are you sure?'))
+    {
+      bill.status = 'done';
+      this.billService.updateBill(bill,bill.id).subscribe(res=>{
+        this.router.navigate(['/home/bills/new']);
+      });
+    }
+    this.toast.success('Cancel Success!', 'Message')
+  }
 
 }

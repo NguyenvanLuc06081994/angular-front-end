@@ -16,6 +16,8 @@ import {BListComponent} from "./bills/b-list/b-list.component";
 
 import {ProfileComponent} from './customers/profile/profile.component';
 import {PasswordComponent} from './customers/password/password.component';
+import {BNewComponent} from "./bills/b-new/b-new.component";
+import {BOldComponent} from "./bills/b-old/b-old.component";
 
 
 const routes: Routes = [
@@ -34,8 +36,13 @@ const routes: Routes = [
       {path: 'add', component: AddComponent},
       {path: 'detail/:id', component: DetailComponent },
       {path: 'checkout/:id', component: CheckoutComponent },
-
-      {path: 'bills', component: BListComponent},
+      {path: 'bills',
+        children: [
+          {path: '', component: BListComponent},
+          {path:'new', component: BNewComponent},
+          {path:'old', component: BOldComponent},
+        ],
+      },
 
     ],
     canActivate: [IsAuthenGuard]

@@ -9,23 +9,27 @@
       <thead class="thead-dark">
       <tr>
         <th scope="col">No</th>
+        <th scope="col">House Name</th>
         <th scope="col">TotalPrice</th>
         <th scope="col">CheckIn</th>
         <th scope="col">CheckOut</th>
         <th scope="col">Status</th>
         <th scope="col">People</th>
-        <th scope="col">House Name</th>
+
+        <th scope="col">Action</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let bill of billOderOld; let i = index">
         <td>{{i+1}}</td>
+        <td >{{bill.house.name}}</td>
         <td>{{bill.totalPrice}}</td>
         <td>{{bill.checkIn}}</td>
         <td>{{bill.checkOut}}</td>
         <td>{{bill.status}}</td>
         <td>{{bill.order}}</td>
-        <td >{{bill.house.name}}</td>
+
+        <td ><a class="btn btn-danger">Delete</a></td>
       </tr>
       </tbody>
     </table>
@@ -41,8 +45,8 @@
         <th scope="col">CheckOut</th>
         <th scope="col">Status</th>
         <th scope="col">People</th>
-
         <th scope="col">TotalPrice</th>
+        <th scope="col">Action</th>
       </tr>
       </thead>
       <tbody>
@@ -56,6 +60,7 @@
         <td>{{bill.status}}</td>
         <td>{{bill.order}}</td>
         <td>{{bill.totalPrice}}</td>
+        <td><a class="btn btn-danger">Delete</a></td>
         <td ></td>
 
       </tr>

@@ -40,21 +40,21 @@ export class BListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.userLogin = this.authService.getUserLogin();
-    console.log(this.userLogin.id);
-    this.billService.getBillByUserId(this.userLogin.id).subscribe(data => {
-      this.billOder = data;
-      console.log(this.billOder);
-      for(let i =0;i<this.billOder.length;i++)
-      {
-        if(this.billOder[i].status == 'pending')
-        {
-          this.billOderNew.push(this.billOder[i]);
-        }
-      }
-
-    });
-    this.getHostHouse();
+    // this.userLogin = this.authService.getUserLogin();
+    // console.log(this.userLogin.id);
+    // this.billService.getBillByUserId(this.userLogin.id).subscribe(data => {
+    //   this.billOder = data;
+    //   console.log(this.billOder);
+    //   for(let i =0;i<this.billOder.length;i++)
+    //   {
+    //     if(this.billOder[i].status == 'pending')
+    //     {
+    //       this.billOderNew.push(this.billOder[i]);
+    //     }
+    //   }
+    //
+    // });
+    // this.getHostHouse();
   }
 
   getHostHouse()

@@ -7,6 +7,7 @@ import {CustomerService} from "../../services/customer.service";
 import {IBill} from "../../interfaces/ibill";
 import {ICustomer} from "../../interfaces/icustomer";
 import {IHouse} from "../../interfaces/ihouse";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-b-new',
@@ -31,20 +32,22 @@ export class BNewComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private authService: AuthService,
-              private customerService: CustomerService,) {
+              private customerService: CustomerService,
+              private toast: ToastrService) {
 
   }
 
   id = +this.route.snapshot.paramMap.get('id');
   ngOnInit(): void {
     this.userLogin = this.authService.getUserLogin();
+    console.log(this.userLogin);
     this.billService.getBillByUserId(this.userLogin.id).subscribe(bills=>{
       this.billOder = bills;
       for(let i =0; i<this.billOder.length;i++)
       {
         if(this.billOder[i].status == 'pending')
         {
-          this.billOderNew.push(this.billOder[i]);
+            this.billOderNew.push(this.billOder[i]);
         }
       }
     });
@@ -73,9 +76,20 @@ export class BNewComponent implements OnInit {
           }
         });
       }
-      console.log(this.billHostNew);
-      console.log(this.customerOder);
     });
+  }
+
+  cancelBillOrder(index)
+  {
+    let bill = this.billOderNew[index];
+    if(confirm('Are you sure?'))
+    {
+      bill.status = 'done';
+      this.billService.updateBill(bill,bill.id).subscribe(res=>{
+        this.router.navigate(['/home/bills/new']);
+      });
+    }
+    this.toast.success('Cancel Success!', 'Message')
   }
 
 }

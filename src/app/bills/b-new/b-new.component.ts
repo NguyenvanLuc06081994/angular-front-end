@@ -20,10 +20,13 @@ export class BNewComponent implements OnInit {
   billOder;
   billOderNew: IBill[] =[];
   billHouse;
-  billHostNew:IHouse[]=[];
+  billHostNew:IBill[]=[];
   houses;
   customerBook;
   customerOder:ICustomer[]=[];
+
+  todayDate : Date = new Date();
+
 
 
 
@@ -52,6 +55,10 @@ export class BNewComponent implements OnInit {
       }
     });
     this.getHostHouse();
+    console.log(typeof (this.todayDate.getDate()));
+    console.log(this.todayDate.getMonth()+1);
+    console.log(this.todayDate.getDate());
+
   }
 
   getHostHouse()
@@ -82,14 +89,51 @@ export class BNewComponent implements OnInit {
   cancelBillOrder(index)
   {
     let bill = this.billOderNew[index];
-    if(confirm('Are you sure?'))
-    {
-      bill.status = 'done';
-      this.billService.updateBill(bill,bill.id).subscribe(res=>{
-        this.router.navigate(['/home/bills/new']);
-      });
+    let checkIn = new Date(bill.checkIn);
+    console.log(checkIn.getDate());
+    function checkDay(checkIn,todayDate) {
+      if(checkIn.getFullYear() == todayDate.getFullYear())
+      {
+        if(checkIn.getMonth() == todayDate.getMonth())
+        {
+          if(checkIn.getDate() - todayDate.getDate() <= 1 )
+          {
+            return false
+          }
+          else if (checkIn.getMonth() - todayDate.getMonth() ==1)
+          {
+            let dayOfMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+            if(checkIn.getDate()-dayOfMonth[checkIn.getMonth()] == 0)
+            {
+              return false
+            }
+          }
+          else
+          {
+            return true;
+          }
+        }
+        return true;
+      }
+      return true;
     }
-    this.toast.success('Cancel Success!', 'Message')
+
+    if(checkDay(checkIn, this.todayDate))
+    {
+      if(confirm('Are you sure?'))
+      {
+        bill.status = 'done';
+        this.billService.updateBill(bill,bill.id).subscribe(res=>{
+          this.router.navigate(['/home/bills/new']);
+        });
+        this.toast.success('Cancel Success!', 'Message');
+      }
+
+    }
+    else {
+      this.toast.error('Cannot Cancel!!!','Message');
+    }
+
   }
 
 }

@@ -57,32 +57,32 @@ export class BListComponent implements OnInit {
     // this.getHostHouse();
   }
 
-  getHostHouse()
-  {
-    this.houseService.getHouseByCustomerId(this.userLogin.id).subscribe(data => {
-      this.houses = data;
-      for (let i = 0; i < this.houses.length; i++)
-      {
-        this.billService.getBillByHouseId(this.houses[i].id).subscribe(house => {
-          this.billHouse = house;
-          console.log(this.billHouse);
-          if (this.billHouse != 0) {
-            // @ts-ignore
-            this.billHost.push(this.billHouse[0]);
-
-            this.customerService.getCustomerById(this.billHouse[0].customer_id).subscribe(customer=>{
-              this.customerBook = customer;
-              this.customerOder.push(this.customerBook['user']) ;
-
-            });
-
-          }
-        });
-      }
-      console.log(this.billHost);
-      console.log(this.customerOder);
-    });
-  }
+  // getHostHouse()
+  // {
+  //   this.houseService.getHouseByCustomerId(this.userLogin.id).subscribe(data => {
+  //     this.houses = data;
+  //     for (let i = 0; i < this.houses.length; i++)
+  //     {
+  //       this.billService.getBillByHouseId(this.houses[i].id).subscribe(house => {
+  //         this.billHouse = house;
+  //         console.log(this.billHouse);
+  //         if (this.billHouse != 0) {
+  //           // @ts-ignore
+  //           this.billHost.push(this.billHouse[0]);
+  //
+  //           this.customerService.getCustomerById(this.billHouse[0].customer_id).subscribe(customer=>{
+  //             this.customerBook = customer;
+  //             this.customerOder.push(this.customerBook['user']) ;
+  //
+  //           });
+  //
+  //         }
+  //       });
+  //     }
+  //     console.log(this.billHost);
+  //     console.log(this.customerOder);
+  //   });
+  // }
 
 
 }

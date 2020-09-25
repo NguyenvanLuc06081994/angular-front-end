@@ -37,10 +37,11 @@
                   <i class="icon_star"></i>
                   <i class="icon_star-half_alt"></i>
                 </div>
-                <a [routerLink]="['/home/checkout',house.id]">Booking Now</a>
+
+                <a  (click)="booking()" >Booking Now</a>
               </div>
             </div>
-            <h2>{{house.price}} VNĐ<span>/Pernight</span></h2>
+            <h2>{{house.price}} VNĐ<span>/night</span></h2>
             <table>
               <tbody>
               <tr>

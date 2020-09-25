@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {BillService} from '../../services/bill.service';
 import {AuthService} from '../../services/auth.service';
 import {DataService} from '../../services/data.service';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-detail',
@@ -39,7 +40,8 @@ export class DetailComponent implements OnInit {
               private customerService: CustomerService,
               private billService: BillService,
               private fb: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private toast: ToastrService) {
 
   }
 
@@ -70,6 +72,24 @@ export class DetailComponent implements OnInit {
   add(): any {
     const data = this.detailForm.value;
     this.dataService.addData(data);
+  }
+
+  alertNotBook()
+  {
+    this.toast.error('You Cannot Book Now!','Error')
+  }
+
+  booking()
+  {
+    if(this.house.status == 'dang cho thue')
+    {
+      this.alertNotBook();
+    }
+    else
+    {
+      this.router.navigate(['/home/checkout/' + this.house.id])
+    }
+
   }
 
 }

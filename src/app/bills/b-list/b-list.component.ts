@@ -16,7 +16,7 @@ import {ICustomer} from "../../interfaces/icustomer";
 })
 export class BListComponent implements OnInit {
   billOder;
-  customersBook;
+  customerBook;
   houses;
   userLogin;
   bills;
@@ -39,18 +39,16 @@ export class BListComponent implements OnInit {
 
   ngOnInit(): void {
     this.userLogin = this.authService.getUserLogin();
-
     console.log(this.userLogin.id);
     this.billService.getBillByUserId(this.userLogin.id).subscribe(data => {
       this.billOder = data;
-      console.log(data);
+
     });
     this.getHostHouse();
   }
 
   getHostHouse()
   {
-    let count = 0;
     this.houseService.getHouseByCustomerId(this.userLogin.id).subscribe(data => {
       this.houses = data;
       for (let i = 0; i < this.houses.length; i++)
@@ -60,20 +58,19 @@ export class BListComponent implements OnInit {
           console.log(this.billHouse);
           if (this.billHouse != 0) {
             // @ts-ignore
-            this.billHost[count] = this.billHouse[0];
-            this.customerService.getCustomerById(this.billHost[count].customer_id).subscribe(customer=>{
-              this.customersBook = customer;
-              console.log(this.customersBook);
-              this.customerOder[count] = this.customersBook['user'];
+            this.billHost.push(this.billHouse[0]);
+
+            this.customerService.getCustomerById(this.billHouse[0].customer_id).subscribe(customer=>{
+              this.customerBook = customer;
+              this.customerOder.push(this.customerBook['user']) ;
+
             });
-            count++;
+
           }
         });
       }
       console.log(this.billHost);
       console.log(this.customerOder);
-
-
     });
 
   }

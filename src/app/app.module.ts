@@ -63,10 +63,11 @@ import { PasswordComponent } from './customers/password/password.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     BrowserAnimationsModule,
+    NgxDropzoneModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
     }),
-    NgxDropzoneModule
+
 
   ],
   providers: [AngularFirestoreModule, AngularFireStorage],

@@ -37,8 +37,6 @@ export class AddComponent implements OnInit {
     return this.addHouseForm.get('name');
   }
 
-
-
   get typeHouse()
   {
     return this.addHouseForm.get('type_house');
@@ -94,6 +92,7 @@ export class AddComponent implements OnInit {
       price: ['', [Validators.required]],
     });
     this.customerLogin = this.authService.getUserLogin();
+    console.log(new Date())
   }
 
   // tslint:disable-next-line:typedef
@@ -146,40 +145,12 @@ export class AddComponent implements OnInit {
           });
         }))
     ).subscribe();
-    // task.snapshotChanges().pipe(
-    //   finalize(() => {
-    //
-    //
-    //
-    //     console.log(image);
 
-    //     if (i === size - 1){
-    //       this.router.navigate(['/home/list'], {
-    //         queryParams: { created: 'true' },
-    //       });
-    //     }
-    //   })
-    // )
 
   }
 
 
-  // upload(event) {
-  //   const file = event.target.files[0];
-  //   const filePath = file.name;
-  //   let fileRef = this.storage.ref(filePath);
-  //   const task = this.storage.upload(filePath, file);
-  //
-  //   task.snapshotChanges().pipe(
-  //     finalize(() => fileRef.getDownloadURL().subscribe(
-  //       url => {
-  //         this.downloadURL = url;
-  //         this.addHouseForm.value.image = url;
-  //       }))
-  //   )
-  //     .subscribe();
-  // }
-  // tslint:disable-next-line:typedef
+
   list() {
     this.router.navigate(['home']);
   }
@@ -187,5 +158,6 @@ export class AddComponent implements OnInit {
   showSuccess() {
     this.toast.success('Add New House Success!!', 'Alert');
   }
+
 
 }

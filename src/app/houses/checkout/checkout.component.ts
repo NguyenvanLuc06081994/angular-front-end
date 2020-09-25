@@ -79,7 +79,7 @@ export class CheckoutComponent implements OnInit {
     this.getHouse();
     this.dataService.dataShare.subscribe(result => {
       this.formDetail = result;
-      console.log(result);
+
     });
   }
 

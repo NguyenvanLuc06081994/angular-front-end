@@ -8,6 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {CustomerService} from "../../services/customer.service";
 import {IHouse} from "../../interfaces/ihouse";
 import {ICustomer} from "../../interfaces/icustomer";
+import {IBill} from "../../interfaces/ibill";
 
 @Component({
   selector: 'app-b-list',
@@ -23,6 +24,7 @@ export class BListComponent implements OnInit {
   billHost:IHouse[]=[];
   customerOder:ICustomer[]=[];
   billHouse;
+  billOderNew: IBill[] =[];
 
 
   constructor(private billService: BillService,
@@ -42,6 +44,14 @@ export class BListComponent implements OnInit {
     console.log(this.userLogin.id);
     this.billService.getBillByUserId(this.userLogin.id).subscribe(data => {
       this.billOder = data;
+      console.log(this.billOder);
+      for(let i =0;i<this.billOder.length;i++)
+      {
+        if(this.billOder[i].status == 'pending')
+        {
+          this.billOderNew.push(this.billOder[i]);
+        }
+      }
 
     });
     this.getHostHouse();
@@ -72,7 +82,6 @@ export class BListComponent implements OnInit {
       console.log(this.billHost);
       console.log(this.customerOder);
     });
-
   }
 
 

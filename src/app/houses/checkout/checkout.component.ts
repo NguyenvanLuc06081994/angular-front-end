@@ -120,11 +120,11 @@ export class CheckoutComponent implements OnInit {
     this.bill.customer_id = this.userLogin.id;
     // @ts-ignore
     this.bill.house_id = this.house.id;
-    const checkIn = new Date(`"${this.formCheckout.value.checkIn}"`);
-    const getDateCheckIn = checkIn.getDate();
-    const checkOut = new Date(`"${this.formCheckout.value.checkOut}"`);
-    const getDateCheckOut = checkOut.getDate();
-    const result = getDateCheckOut - getDateCheckIn;
+    const checkIn = new Date(this.formCheckout.value.checkIn);
+
+    const checkOut = new Date(this.formCheckout.value.checkOut);
+
+    const result = this.caculatePrice(checkIn,checkOut);
     // @ts-ignore
     this.bill.totalPrice = result * this.house.price;
     // @ts-ignore
@@ -144,6 +144,35 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  caculatePrice(checkIn, checkOut)
+  {
+    let dayOfMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
+    let result =0;
+    if(checkIn.getFullYear() == checkOut.getFullYear())
+    {
+      if(checkIn.getMonth() == checkOut.getMonth())
+      {
+        result = result+ checkOut.getDate() - checkIn.getDate();
+        return result;
+      }
+      else {
+        if (checkOut.getMonth()-checkIn.getMonth() == 1)
+        {
+          result = result + checkOut.getDate() + dayOfMonth[checkIn.getMonth()] - checkIn.getDate();
+          return  result;
+        }
+        else {
+          let countMonth = checkOut.getMonth()-checkIn.getMonth();
+          for(let i = 1; i<countMonth;i++)
+          {
+            result += dayOfMonth[checkIn.getMonth()+i];
+          }
+          result = result + checkOut.getDate() + dayOfMonth[checkIn.getMonth()] - checkIn.getDate();
+          return result;
+        }
+      }
+    }
+  }
   showSuccess()
   {
     this.toast.success('Checkout Success!!', 'Alert');

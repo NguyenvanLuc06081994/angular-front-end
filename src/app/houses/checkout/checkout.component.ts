@@ -97,7 +97,14 @@ export class CheckoutComponent implements OnInit {
       });
     });
   }
-
+  getCheckin()
+  {
+    return this.formCheckout.get('checkIn');
+  }
+  getCheckout()
+  {
+    return this.formCheckout.get('checkOut');
+  }
   get order()
   {
     return this.formCheckout.get('order');

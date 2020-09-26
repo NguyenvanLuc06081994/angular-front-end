@@ -33,6 +33,7 @@ export class DetailComponent implements OnInit {
   };
   detailForm: FormGroup;
   dataService: any;
+  userLogin
 
   constructor(private houseService: HouseService,
               private router: Router,
@@ -49,6 +50,7 @@ export class DetailComponent implements OnInit {
 
   // @ts-ignore
   ngOnInit(private dataService: DataService): void {
+    this.userLogin = this.authService.getUserLogin();
     this.detailForm = this.fb.group({
       checkIn: [''],
       checkOut: [''],
@@ -74,16 +76,14 @@ export class DetailComponent implements OnInit {
     this.dataService.addData(data);
   }
 
-  alertNotBook()
-  {
-    this.toast.error('You Cannot Book Now!','Error')
-  }
+
 
   booking()
   {
-    if(this.house.status == 'dang cho thue')
+    if(this.house.customer_id == this.userLogin.id)
     {
-      this.alertNotBook();
+      this.toast.error('You Cannot Book This House!','Error')
+
     }
     else
     {

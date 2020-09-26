@@ -85,6 +85,10 @@ export class DetailComponent implements OnInit {
       this.toast.error('You Cannot Book This House!','Error')
 
     }
+    else if(this.house.status == 'Đang Sửa Chữa')
+    {
+      this.toast.error('You Cannot Book This House', 'Error');
+    }
     else
     {
       this.router.navigate(['/home/checkout/' + this.house.id])

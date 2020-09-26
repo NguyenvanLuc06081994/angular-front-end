@@ -31,7 +31,7 @@
         </div>
         <div *ngIf="typeHouse.touched && typeHouse.invalid">
           <div *ngIf="typeHouse.errors.required">
-            <p class="text text-danger"> *Type Room required</p>
+            <p class="text text-danger"> *Please Choose Type House</p>
           </div>
         </div>
         <br>
@@ -44,7 +44,7 @@
         </div>
         <div *ngIf="typeRoom.touched && typeRoom.invalid">
           <div *ngIf="typeRoom.errors.required">
-            <p class="text text-danger"> *Type Room required</p>
+            <p class="text text-danger"> *Please Choose Type Room</p>
           </div>
         </div>
         <br>
@@ -99,10 +99,19 @@
             <p class="text text-danger"> *Description no more than 250 character</p>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" formControlName="status" placeholder="status"
-                 aria-label="status" value="Còn Phòng">
+        <div class="select-option">
+          <select formControlName="status" aria-label="status" class="custom-select"  >
+            <option [selected]="[]">Status</option>
+            <option value="Còn Phòng" >Còn Phòng</option>
+            <option value="Đang Sửa Chữa">Đang Sửa Chữa</option>
+          </select>
         </div>
+        <div *ngIf="status.touched && status.invalid">
+          <div *ngIf="status.errors.required">
+            <p class="text text-danger"> *Please Choose Status House</p>
+          </div>
+        </div>
+        <br>
 
         <div class="input-group mb-3">
           <input type="number" class="form-control" formControlName="price" placeholder="price"

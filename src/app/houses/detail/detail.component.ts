@@ -6,7 +6,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {BillService} from '../../services/bill.service';
 import {AuthService} from '../../services/auth.service';
 import {DataService} from '../../services/data.service';
-import {ToastrService} from "ngx-toastr";
+import {ToastrService} from 'ngx-toastr';
+import {CommentService} from '../../services/comment.service';
 
 @Component({
   selector: 'app-detail',
@@ -33,7 +34,18 @@ export class DetailComponent implements OnInit {
   };
   detailForm: FormGroup;
   dataService: any;
+
   userLogin
+  comments;
+  customers;
+  formComment: FormGroup;
+  commentAdd = {
+    title: '',
+    content: '',
+    house_id: '',
+    user_id: ''
+  };
+
 
   constructor(private houseService: HouseService,
               private router: Router,
@@ -42,7 +54,9 @@ export class DetailComponent implements OnInit {
               private billService: BillService,
               private fb: FormBuilder,
               private authService: AuthService,
-              private toast: ToastrService) {
+              private toast: ToastrService,
+              private commentService: CommentService
+  ) {
 
   }
 
@@ -56,7 +70,18 @@ export class DetailComponent implements OnInit {
       checkOut: [''],
       order: ['']
     });
+
+    this.formComment = this.fb.group({
+      title: [''],
+      content: ['']
+    });
     this.getHouse();
+    this.commentService.getAll().subscribe(data => {
+      this.comments = data;
+    });
+    this.customerService.getAllCustomers().subscribe(data => {
+      this.customers = data;
+    });
   }
 
   // tslint:disable-next-line:typedef
@@ -78,6 +103,7 @@ export class DetailComponent implements OnInit {
 
 
 
+
   booking()
   {
     if(this.house.customer_id == this.userLogin.id)
@@ -92,8 +118,31 @@ export class DetailComponent implements OnInit {
     else
     {
       this.router.navigate(['/home/checkout/' + this.house.id])
+
     }
 
+  }
+
+  addComment() {
+    // console.log(this.formComment.value);
+    // @ts-ignore
+    this.commentAdd.house_id = this.id;
+    const userLogin = this.authService.getUserLogin();
+    // @ts-ignore
+    this.commentAdd.user_id = userLogin.id;
+    this.commentAdd.title = this.formComment.value.title;
+    this.commentAdd.content = this.formComment.value.content;
+    console.log(this.commentAdd);
+    this.commentService.add(this.commentAdd).subscribe(data => {
+      this.formComment = this.fb.group({
+        title: [''],
+        content: ['']
+      });
+      this.commentService.getAll().subscribe(data => {
+        this.comments = data;
+      });
+    });
+    this.toast.success('thank you for your comment!');
   }
 
 }

@@ -34,6 +34,8 @@ export class DetailComponent implements OnInit {
   };
   detailForm: FormGroup;
   dataService: any;
+
+  userLogin
   comments;
   customers;
   formComment: FormGroup;
@@ -43,6 +45,7 @@ export class DetailComponent implements OnInit {
     house_id: '',
     user_id: ''
   };
+
 
   constructor(private houseService: HouseService,
               private router: Router,
@@ -61,6 +64,7 @@ export class DetailComponent implements OnInit {
 
   // @ts-ignore
   ngOnInit(private dataService: DataService): void {
+    this.userLogin = this.authService.getUserLogin();
     this.detailForm = this.fb.group({
       checkIn: [''],
       checkOut: [''],
@@ -97,15 +101,24 @@ export class DetailComponent implements OnInit {
     this.dataService.addData(data);
   }
 
-  alertNotBook() {
-    this.toast.error('You Cannot Book Now!', 'Error');
-  }
 
-  booking() {
-    if (this.house.status == 'dang cho thue') {
-      this.alertNotBook();
-    } else {
-      this.router.navigate(['/home/checkout/' + this.house.id]);
+
+
+  booking()
+  {
+    if(this.house.customer_id == this.userLogin.id)
+    {
+      this.toast.error('You Cannot Book This House!','Error')
+
+    }
+    else if(this.house.status == 'Đang Sửa Chữa')
+    {
+      this.toast.error('You Cannot Book This House', 'Error');
+    }
+    else
+    {
+      this.router.navigate(['/home/checkout/' + this.house.id])
+
     }
 
   }

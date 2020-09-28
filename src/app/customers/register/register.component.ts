@@ -106,8 +106,9 @@ export class RegisterComponent implements OnInit {
       .subscribe();
   }
 
-  // tslint:disable-next-line:typedef
+
   register() {
+    console.log(this.registerForm.value.inputFile);
     this.registerService.register(this.registerForm.value).subscribe(data => {
       this.router.navigate(['login']);
     });

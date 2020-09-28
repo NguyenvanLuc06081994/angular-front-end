@@ -18,6 +18,7 @@ import {ProfileComponent} from './customers/profile/profile.component';
 import {PasswordComponent} from './customers/password/password.component';
 import {BNewComponent} from "./bills/b-new/b-new.component";
 import {BOldComponent} from "./bills/b-old/b-old.component";
+import {UserListComponent} from "./houses/user-list/user-list.component";
 
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
     children: [
       {path: '', component: HomeComponent},
       {path: 'list', component: ListComponent},
+      {path: 'userList', component:UserListComponent},
       {path: 'add', component: AddComponent},
       {path: 'detail/:id', component: DetailComponent },
       {path: 'checkout/:id', component: CheckoutComponent },

@@ -7,6 +7,17 @@
           <input type="text" class="form-control" formControlName="name" placeholder="Name House"
                  aria-label="name">
         </div>
+        <div *ngIf="name.touched && name.invalid">
+          <div *ngIf="name.errors.required">
+            <p class="text text-danger"> *Name House required</p>
+          </div>
+          <div *ngIf="name.errors.maxlength">
+            <p class="text text-danger"> *Name House no more than 120 characters </p>
+          </div>
+          <div *ngIf="name.errors.minlength">
+            <p class="text text-danger"> *Name House no less than 2 characters</p>
+          </div>
+        </div>
 
         <div class="select-option">
           <select formControlName="type_house" aria-label="type_house" class="custom-select" id="typeHouse" >
@@ -17,6 +28,11 @@
             <option value="Penhouse">Penhouse</option>
           </select>
         </div>
+        <div *ngIf="typeHouse.touched && typeHouse.invalid">
+          <div *ngIf="typeHouse.errors.required">
+            <p class="text text-danger"> *Please Choose Type House</p>
+          </div>
+        </div>
 
         <div class="select-option">
           <select formControlName="type_room" aria-label="type_room" class="custom-select"  >
@@ -25,21 +41,50 @@
             <option value="Phòng Vip">Phòng Vip</option>
           </select>
         </div>
+        <div *ngIf="typeRoom.touched && typeRoom.invalid">
+          <div *ngIf="typeRoom.errors.required">
+            <p class="text text-danger"> *Please Choose Type Room</p>
+          </div>
+        </div>
 
         <div class="input-group mb-3">
           <textarea type="text" class="form-control" formControlName="address" placeholder="Address"
                     aria-label="Address">
           </textarea>
         </div>
+        <div *ngIf="address.touched && address.invalid">
+          <div *ngIf="address.errors.required">
+            <p class="text text-danger"> *Address required</p>
+          </div>
+          <div *ngIf="address.errors.maxlength">
+            <p class="text text-danger"> *Address no more than 250 character</p>
+          </div>
+        </div>
 
         <div class="input-group mb-3">
           <input type="number" class="form-control" formControlName="bedroom" placeholder="Bedroom"
                  aria-label="bedroom">
         </div>
+        <div *ngIf="bedroom.touched && bedroom.invalid">
+          <div *ngIf="bedroom.errors.required">
+            <p class="text text-danger"> *Bedroom required</p>
+          </div>
+          <div *ngIf="bedroom.errors.min">
+            <p class="text text-danger">*Bedroom min 1</p>
+          </div>
+        </div>
 
         <div class="input-group mb-3">
           <input type="number" class="form-control" formControlName="bathroom" placeholder="Bathroom"
                  aria-label="bathroom">
+        </div>
+        <div *ngIf="bathroom.touched && bathroom.invalid">
+          <div *ngIf="bathroom.errors.required">
+            <p class="text text-danger"> *Bathroom required</p>
+          </div>
+          <div *ngIf="bathroom.errors.min">
+            <p class="text text-danger">*Bathroom min 1</p>
+          </div>
         </div>
 
         <div class="input-group mb-3">
@@ -55,13 +100,24 @@
             <option value="Đang Sửa Chữa">Đang Sửa Chữa</option>
           </select>
         </div>
+        <div *ngIf="status.touched && status.invalid">
+          <div *ngIf="status.errors.required">
+            <p class="text text-danger"> *Please Choose Status House</p>
+          </div>
+        </div>
 
         <div class="input-group mb-3">
           <input type="number" class="form-control" formControlName="price" placeholder="price"
                  aria-label="price">
         </div>
+        <div *ngIf="price.touched && price.invalid">
+          <div *ngIf="price.errors.required">
+            <p class="text text-danger"> *Price required</p>
+          </div>
+        </div>
 
-        <button class="btn btn-info">Update</button>
+
+        <button class="btn btn-info" [disabled]="updateFormHouse.invalid">Update</button>
         <button class="btn btn-danger" (click)="back()">Cancel</button>
       </form>
     </div>

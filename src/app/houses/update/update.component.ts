@@ -25,7 +25,7 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateFormHouse = this.fb.group({
-      name : ['', [Validators.maxLength(120), Validators.minLength(5), Validators.required]],
+      name : ['', [Validators.maxLength(120), Validators.minLength(2), Validators.required]],
       address: ['', [Validators.required,  Validators.maxLength(250)]],
       type_house: ['',Validators.required],
       type_room: ['',Validators.required],

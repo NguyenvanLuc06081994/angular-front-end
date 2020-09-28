@@ -1,0 +1,69 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="text-center"> Edit Your House</h1>
+      <form [formGroup]="updateFormHouse" (ngSubmit)="updateHouse()">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" formControlName="name" placeholder="Name House"
+                 aria-label="name">
+        </div>
+
+        <div class="select-option">
+          <select formControlName="type_house" aria-label="type_house" class="custom-select" id="typeHouse" >
+            <option [selected]="[]">Choose Type House</option>
+            <option value="Nhà Nghỉ" >Nhà Nghỉ</option>
+            <option value="Khách Sạn">Khách sạn</option>
+            <option value="Homestay">Homestay</option>
+            <option value="Penhouse">Penhouse</option>
+          </select>
+        </div>
+
+        <div class="select-option">
+          <select formControlName="type_room" aria-label="type_room" class="custom-select"  >
+            <option [selected]="[]">Choose Type Room</option>
+            <option value="Phòng thường" >Phòng thường</option>
+            <option value="Phòng Vip">Phòng Vip</option>
+          </select>
+        </div>
+
+        <div class="input-group mb-3">
+          <textarea type="text" class="form-control" formControlName="address" placeholder="Address"
+                    aria-label="Address">
+          </textarea>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" formControlName="bedroom" placeholder="Bedroom"
+                 aria-label="bedroom">
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" formControlName="bathroom" placeholder="Bathroom"
+                 aria-label="bathroom">
+        </div>
+
+        <div class="input-group mb-3">
+          <textarea type="text" class="form-control" formControlName="description" placeholder="Description"
+                    aria-label="Description">
+          </textarea>
+        </div>
+
+        <div class="select-option">
+          <select formControlName="status" aria-label="status" class="custom-select"  >
+            <option [selected]="[]">Status</option>
+            <option value="Còn Phòng" >Còn Phòng</option>
+            <option value="Đang Sửa Chữa">Đang Sửa Chữa</option>
+          </select>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" formControlName="price" placeholder="price"
+                 aria-label="price">
+        </div>
+
+        <button class="btn btn-info">Update</button>
+        <button class="btn btn-danger" (click)="back()">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

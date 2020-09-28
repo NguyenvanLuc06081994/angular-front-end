@@ -1,7 +1,7 @@
 // @ts-ignore
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 // @ts-ignore
-import { Routes, RouterModule } from '@angular/router';
+import {Routes, RouterModule} from '@angular/router';
 import {RegisterComponent} from './customers/register/register.component';
 import {HomeComponent} from './layouts/home/home.component';
 import {LoginComponent} from './customers/login/login.component';
@@ -19,6 +19,7 @@ import {PasswordComponent} from './customers/password/password.component';
 import {BNewComponent} from "./bills/b-new/b-new.component";
 import {BOldComponent} from "./bills/b-old/b-old.component";
 import {UserListComponent} from "./houses/user-list/user-list.component";
+import {UpdateComponent} from "./houses/update/update.component";
 
 
 const routes: Routes = [
@@ -34,15 +35,17 @@ const routes: Routes = [
     children: [
       {path: '', component: HomeComponent},
       {path: 'list', component: ListComponent},
-      {path: 'userList', component:UserListComponent},
+      {path: 'userList', component: UserListComponent},
       {path: 'add', component: AddComponent},
-      {path: 'detail/:id', component: DetailComponent },
-      {path: 'checkout/:id', component: CheckoutComponent },
-      {path: 'bills',
+      {path: 'detail/:id', component: DetailComponent},
+      {path: 'checkout/:id', component: CheckoutComponent},
+      {path: 'update/:id', component: UpdateComponent},
+      {
+        path: 'bills',
         children: [
           {path: '', component: BListComponent},
-          {path:'new', component: BNewComponent},
-          {path:'old', component: BOldComponent},
+          {path: 'new', component: BNewComponent},
+          {path: 'old', component: BOldComponent},
         ],
       },
 
@@ -56,4 +59,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -16,14 +16,14 @@
       </thead>
       <tbody>
       <tr *ngFor=" let house of userListHouse; let i = index">
-        <td>{{i+1}}</td>
-        <td >{{house.name}}</td>
+        <td>{{i + 1}}</td>
+        <td>{{house.name}}</td>
         <td>{{house.price}}</td>
-        <td>{{house.typeHouse}}</td>
-        <td>{{house.typeRoom}}</td>
+        <td>{{house.type_house}}</td>
+        <td>{{house.type_room}}</td>
         <td>{{house.status}}</td>
         <td>{{house.address}}</td>
-        <td ><a class="btn btn-info" >Details</a></td>
+        <td><a class="btn btn-info" [routerLink]="['/home/update',house.id]">Edit</a></td>
       </tr>
       </tbody>
     </table>

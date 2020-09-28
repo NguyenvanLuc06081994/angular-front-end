@@ -71,6 +71,7 @@ export class DetailComponent implements OnInit {
         styles: ''
       },
   };
+
   disableUntil() {
     let d: Date = new Date();
     d.setDate(d.getDate() - 1);
@@ -88,9 +89,11 @@ export class DetailComponent implements OnInit {
   getCopyOfOptions(): IAngularMyDpOptions {
     return JSON.parse(JSON.stringify(this.myDatePickerOptions));
   }
+
   onCalendar(): void {
-    return  this.mydp.openCalendar();
+    return this.mydp.openCalendar();
   }
+
   house = {
     id: '',
     name: '',
@@ -110,7 +113,7 @@ export class DetailComponent implements OnInit {
   };
   detailForm: FormGroup;
   dataService: any;
-  imgs ={
+  imgs = {
     id: '',
     house_id: '',
     ref: ''
@@ -136,19 +139,16 @@ export class DetailComponent implements OnInit {
               private fb: FormBuilder,
               private authService: AuthService,
               private toast: ToastrService,
-
+              private commentService: CommentService,
               private imgService: ImageService) {
-
-              private commentService: CommentService
-  ) {
-
-
   }
+
 
   id = +this.route.snapshot.paramMap.get('id');
 
-  // @ts-ignore
-  ngOnInit(private dataService: DataService): void {
+// @ts-ignore
+  ngOnInit():
+    void {
     this.userLogin = this.authService.getUserLogin();
     this.detailForm = this.fb.group({
       checkIn: [''],
@@ -173,13 +173,12 @@ export class DetailComponent implements OnInit {
 
   }
 
-  getImgById(){
-    this.imgService.getImageHouse(this.id).subscribe(data =>{
+  getImgById() {
+    this.imgService.getImageHouse(this.id).subscribe(data => {
       this.imgs = data;
       console.log(this.imgs);
     });
   }
-
 
 
   getHouse() {
@@ -194,39 +193,26 @@ export class DetailComponent implements OnInit {
     });
   }
 
-  add(): any {
+  add()
+    :
+    any {
     const data = this.detailForm.value;
     this.dataService.addData(data);
   }
 
 
-  alertNotBook()
-  {
-    this.toast.error('You Cannot Book Now!','Error');
+  alertNotBook() {
+    this.toast.error('You Cannot Book Now!', 'Error');
   }
 
-  booking()
-  {
 
-    if(this.house.status == 'dang cho thue')
+  booking() {
+    if (this.house.customer_id == this.userLogin.id) {
+      this.toast.error('You Cannot Book This House!', 'Error')
 
-
-
-
-  booking()
-  {
-    if(this.house.customer_id == this.userLogin.id)
-
-    {
-      this.toast.error('You Cannot Book This House!','Error')
-
-    }
-    else if(this.house.status == 'Đang Sửa Chữa')
-    {
+    } else if (this.house.status == 'Đang Sửa Chữa') {
       this.toast.error('You Cannot Book This House', 'Error');
-    }
-    else
-    {
+    } else {
 
       this.router.navigate(['/home/checkout/' + this.house.id])
 
@@ -235,7 +221,8 @@ export class DetailComponent implements OnInit {
 
   }
 
-  addComment() {
+
+  addComment(): any {
     // console.log(this.formComment.value);
     // @ts-ignore
     this.commentAdd.house_id = this.id;
@@ -256,5 +243,4 @@ export class DetailComponent implements OnInit {
     });
     this.toast.success('thank you for your comment!');
   }
-
 }

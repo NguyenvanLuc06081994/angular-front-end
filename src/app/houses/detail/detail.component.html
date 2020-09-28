@@ -24,8 +24,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
-        <div class="room-details-item">
-          <img src="{{house.image}}" alt="">
+        <div class="room-details-item" *ngFor=" let img of imgs ">
+          <img src="{{img.ref}}" alt="" style="width: 200px; height: 300px " >
           <div class="rd-text">
             <div class="rd-title">
               <h3>{{house.name}}</h3>
@@ -156,34 +156,38 @@
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="room-booking">
-          <h3>Your Reservation</h3>
+        <div>
+          <h3 class="mb-5">Your Reservation</h3>
           <form [formGroup]="detailForm" (ngSubmit)="add()">
             <div class="check-date">
               <label for="date-in">Check In:</label>
-              <input type="date" formControlName="checkIn" id="date-in">
+              <input angular-mydatepicker [options]="myDatePickerOptions"
+                     class="form-control" name="mydate" id="date-in"
+                     placeholder="DD/MM/YYYY" formControlName="checkIn"
+                     #dp="angular-mydatepicker" (click)="disableUntil()"
+              />
 
             </div>
             <div class="check-date">
               <label for="date-out">Check Out:</label>
-              <input type="date" formControlName="checkOut" id="date-out">
+              <input class="form-control"  type="date" formControlName="checkOut" id="date-out">
             </div>
-            <div class="select-option">
+            <div class="select-option form-group">
               <label for="guest">Guests:</label>
-              <select id="guest" formControlName="order">
+              <select class="form-control" id="guest" formControlName="order">
                 <option value="1">1 Adults</option>
                 <option value="2">2 Adults</option>
                 <option value="3">3 Adults</option>
                 <option value="4">4 Adults</option>
               </select>
             </div>
-            <div class="select-option">
-              <label for="room">House:</label>
-              <select id="room">
+            <div class="select-option form-group">
+              <label  for="room">House:</label>
+              <select class="form-control" id="room">
                 <option value="">5 Room</option>
               </select>
             </div>
-            <button [routerLink]="['/home/checkout',house.id]">Check Availability</button>
+            <button class="btn btn-success" [routerLink]="['/home/checkout',house.id]">Check Availability</button>
           </form>
         </div>
       </div>

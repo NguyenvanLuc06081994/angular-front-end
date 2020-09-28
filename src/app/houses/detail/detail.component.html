@@ -88,10 +88,13 @@
         </div>
         <div class="rd-reviews">
           <h4>Reviews</h4>
-          <div class="review-item">
-            <div class="ri-pic">
-              <img src="../../../assets/img/room/avatar/avatar-1.jpg" alt="">
-            </div>
+          <div class="review-item" *ngFor="let comment of comments">
+            <ng-container *ngFor="let customer of customers">
+              <div *ngIf="customer.id == comment.user_id">
+                <div class="ri-pic">
+                <img src="{{customer.image}}" alt="">
+              </div></div>
+            </ng-container>
             <div class="ri-text">
               <span>27 Aug 2019</span>
               <div class="rating">
@@ -99,43 +102,32 @@
                 <i class="icon_star"></i>
                 <i class="icon_star"></i>
                 <i class="icon_star"></i>
-                <i class="icon_star-half_alt"></i>
+                <i class="icon_star"></i>
               </div>
-              <h5>Brandon Kelley</h5>
-              <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                magnam.</p>
-            </div>
-          </div>
-          <div class="review-item">
-            <div class="ri-pic">
-              <img src="../../../assets/img/room/avatar/avatar-2.jpg" alt="">
-            </div>
-            <div class="ri-text">
-              <span>27 Aug 2019</span>
-              <div class="rating">
-                <i class="icon_star"></i>
-                <i class="icon_star"></i>
-                <i class="icon_star"></i>
-                <i class="icon_star"></i>
-                <i class="icon_star-half_alt"></i>
-              </div>
-              <h5>Brandon Kelley</h5>
-              <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                adipisci velit, sed quia non numquam eius modi tempora. incidunt ut labore et dolore
-                magnam.</p>
+              <ng-container *ngFor="let customer of customers">
+                <div *ngIf="customer.id == comment.user_id">
+                  <h5>{{customer.username}}</h5>
+                </div>
+              </ng-container>
+              <p>{{comment.content}}</p>
             </div>
           </div>
         </div>
         <div class="review-add">
           <h4>Add Review</h4>
-          <form action="#" class="ra-form">
+          <form action="#" class="ra-form" [formGroup]="formComment" (ngSubmit)="addComment()">
             <div class="row">
-              <div class="col-lg-6">
-                <input type="text" placeholder="Name*">
-              </div>
-              <div class="col-lg-6">
-                <input type="text" placeholder="Email*">
+<!--              <div class="col-lg-6">-->
+<!--                <input type="text" placeholder="Name*">-->
+<!--              </div>-->
+              <div class="col-lg-12">
+                <label for="feeling">Tell Us About Your FeeLing : </label>
+                <select name="" id="feeling" formControlName="title">
+                  <option value="" [selected]="[]">Your Feeling</option>
+                  <option value="good">Good</option>
+                  <option value="normal">normal</option>
+                  <option value="bad">Bad</option>
+                </select>
               </div>
               <div class="col-lg-12">
                 <div>
@@ -145,11 +137,11 @@
                     <i class="icon_star"></i>
                     <i class="icon_star"></i>
                     <i class="icon_star"></i>
-                    <i class="icon_star-half_alt"></i>
+                    <i class="icon_star"></i>
                   </div>
                 </div>
-                <textarea placeholder="Your Review"></textarea>
-                <button type="submit">Submit Now</button>
+                <textarea placeholder="Your Review" formControlName="content"></textarea>
+                <button>Submit Now</button>
               </div>
             </div>
           </form>
@@ -174,8 +166,10 @@
             </div>
             <div class="select-option form-group">
               <label for="guest">Guests:</label>
+
               <select class="form-control" id="guest" formControlName="order">
-                <option value="1">1 Adults</option>
+                <option value="1" [selected]="[]">1 Adults</option>
+
                 <option value="2">2 Adults</option>
                 <option value="3">3 Adults</option>
                 <option value="4">4 Adults</option>

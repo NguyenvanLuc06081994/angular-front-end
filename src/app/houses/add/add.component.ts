@@ -83,7 +83,6 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.addHouseForm = this.fb.group({
-
       name : ['', [Validators.maxLength(120), Validators.minLength(6), Validators.required]],
       address: ['', [Validators.required,  Validators.maxLength(250)]],
       type_house: ['',Validators.required],

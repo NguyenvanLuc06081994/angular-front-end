@@ -32,6 +32,8 @@ import { ProfileComponent } from './customers/profile/profile.component';
 import { PasswordComponent } from './customers/password/password.component';
 import { BNewComponent } from './bills/b-new/b-new.component';
 import { BOldComponent } from './bills/b-old/b-old.component';
+import { UserListComponent } from './houses/user-list/user-list.component';
+import { UpdateComponent } from './houses/update/update.component';
 
 
 
@@ -55,7 +57,9 @@ import { BOldComponent } from './bills/b-old/b-old.component';
     ProfileComponent,
     PasswordComponent,
     BNewComponent,
-    BOldComponent
+    BOldComponent,
+    UserListComponent,
+    UpdateComponent
 
   ],
   imports: [

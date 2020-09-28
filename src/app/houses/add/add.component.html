@@ -4,7 +4,7 @@
     <div class="col-md-8 offset-md-2">
       <h1 class="text-center"> Add New House</h1>
       <form [formGroup]="addHouseForm" (ngSubmit)="addSubmit()">
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 form-group">
           <input type="text" class="form-control" formControlName="name" placeholder="Name House"
                  aria-label="name">
         </div>
@@ -20,8 +20,8 @@
           </div>
         </div>
 
-        <div class="select-option mr-3">
-          <select formControlName="type_house" aria-label="type_house" class="custom-select" id="typeHouse" >
+        <div class="select-option mr-3 form-group">
+          <select formControlName="type_house" aria-label="type_house" class="custom-select mb-3 form-control" id="typeHouse" >
             <option [selected]="[]">Choose Type House</option>
             <option value="Nhà Nghỉ" >Nhà Nghỉ</option>
             <option value="Khách Sạn">Khách sạn</option>
@@ -34,9 +34,10 @@
             <p class="text text-danger"> *Please Choose Type House</p>
           </div>
         </div>
-        <br>
-        <div class="select-option">
-          <select formControlName="type_room" aria-label="type_room" class="custom-select"  >
+
+
+        <div class="select-option form-group">
+          <select formControlName="type_room" aria-label="type_room" class="custom-select form-control mb-3"  >
             <option [selected]="[]">Choose Type Room</option>
             <option value="Phòng thường" >Phòng thường</option>
             <option value="Phòng Vip">Phòng Vip</option>
@@ -47,8 +48,8 @@
             <p class="text text-danger"> *Please Choose Type Room</p>
           </div>
         </div>
-        <br>
-        <div class="input-group mb-3">
+
+        <div class="input-group mb-3 form-group">
           <textarea type="text" class="form-control" formControlName="address" placeholder="Address"
                 aria-label="Address">
           </textarea>
@@ -62,7 +63,7 @@
           </div>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 form-group">
           <input type="number" class="form-control" formControlName="bedroom" placeholder="Bedroom"
                  aria-label="bedroom">
         </div>
@@ -75,7 +76,7 @@
           </div>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 form-group">
           <input type="number" class="form-control" formControlName="bathroom" placeholder="Bathroom"
                  aria-label="bathroom">
         </div>
@@ -88,7 +89,7 @@
           </div>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 form-group">
           <textarea type="text" class="form-control" formControlName="description" placeholder="Description"
                 aria-label="Description">
           </textarea>
@@ -101,8 +102,9 @@
             <p class="text text-danger"> *Description no more than 250 character</p>
           </div>
         </div>
-        <div class="select-option">
-          <select formControlName="status" aria-label="status" class="custom-select"  >
+
+        <div class="select-option form-group">
+          <select formControlName="status" aria-label="status" class="custom-select form-control mb-3"  >
             <option [selected]="[]">Status</option>
             <option value="Còn Phòng" >Còn Phòng</option>
             <option value="Đang Sửa Chữa">Đang Sửa Chữa</option>
@@ -115,7 +117,7 @@
         </div>
         <br>
 
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 form-group">
           <input type="number" class="form-control" formControlName="price" placeholder="price"
                  aria-label="price">
         </div>

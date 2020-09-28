@@ -3,7 +3,7 @@
     <div class="col-md-8 offset-md-2">
       <h1 class="text-center"> Edit Your House</h1>
       <form [formGroup]="updateFormHouse" (ngSubmit)="updateHouse()">
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 form-group">
           <input type="text" class="form-control" formControlName="name" placeholder="Name House"
                  aria-label="name">
         </div>
@@ -19,8 +19,8 @@
           </div>
         </div>
 
-        <div class="select-option">
-          <select formControlName="type_house" aria-label="type_house" class="custom-select" id="typeHouse" >
+        <div class="form-group">
+          <select formControlName="type_house" aria-label="type_house" class="custom-select mb-4 form-control" id="typeHouse" >
             <option [selected]="[]">Choose Type House</option>
             <option value="Nhà Nghỉ" >Nhà Nghỉ</option>
             <option value="Khách Sạn">Khách sạn</option>
@@ -34,8 +34,8 @@
           </div>
         </div>
 
-        <div class="select-option">
-          <select formControlName="type_room" aria-label="type_room" class="custom-select"  >
+        <div class="form-group">
+          <select formControlName="type_room" aria-label="type_room" class="custom-select mb-3 form-control"  >
             <option [selected]="[]">Choose Type Room</option>
             <option value="Phòng thường" >Phòng thường</option>
             <option value="Phòng Vip">Phòng Vip</option>
@@ -47,7 +47,8 @@
           </div>
         </div>
 
-        <div class="input-group mb-3">
+
+        <div class="input-group mb-3 form-group">
           <textarea type="text" class="form-control" formControlName="address" placeholder="Address"
                     aria-label="Address">
           </textarea>
@@ -61,7 +62,7 @@
           </div>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 form-group">
           <input type="number" class="form-control" formControlName="bedroom" placeholder="Bedroom"
                  aria-label="bedroom">
         </div>
@@ -74,7 +75,7 @@
           </div>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 form-group">
           <input type="number" class="form-control" formControlName="bathroom" placeholder="Bathroom"
                  aria-label="bathroom">
         </div>
@@ -87,14 +88,14 @@
           </div>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 form-group">
           <textarea type="text" class="form-control" formControlName="description" placeholder="Description"
                     aria-label="Description">
           </textarea>
         </div>
 
-        <div class="select-option">
-          <select formControlName="status" aria-label="status" class="custom-select"  >
+        <div class="select-option form-group">
+          <select formControlName="status" aria-label="status" class="custom-select mb-3 form-control"  >
             <option [selected]="[]">Status</option>
             <option value="Còn Phòng" >Còn Phòng</option>
             <option value="Đang Sửa Chữa">Đang Sửa Chữa</option>
@@ -106,7 +107,7 @@
           </div>
         </div>
 
-        <div class="input-group mb-3">
+        <div class="input-group mb-3 form-group">
           <input type="number" class="form-control" formControlName="price" placeholder="price"
                  aria-label="price">
         </div>
@@ -116,10 +117,13 @@
           </div>
         </div>
 
+        <div class="box-center">
+          <button class="btn btn-info mr-3" [disabled]="updateFormHouse.invalid">Update</button>
+          <button class="btn btn-danger" (click)="back()">Cancel</button>
+        </div>
 
-        <button class="btn btn-info" [disabled]="updateFormHouse.invalid">Update</button>
-        <button class="btn btn-danger" (click)="back()">Cancel</button>
       </form>
+      <br>
     </div>
   </div>
 </div>

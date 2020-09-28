@@ -1,8 +1,10 @@
 
 <div class="container">
   <h2 class="text-center">Your Bill</h2>
-  <button [routerLink]="['/home/bills/new']">New</button>
-  <button [routerLink]="['/home/bills/old']">Old</button>
+  <div class="box-center">
+    <button class="btn btn-primary btn-lg mr-3" [routerLink]="['/home/bills/new']">New</button>
+    <button class="btn btn-secondary btn-lg" [routerLink]="['/home/bills/old']">Old</button>
+  </div>
   <div class="row">
     <h1 class="text-center"> Your Bill Order </h1>
     <table class="table table-hover">
@@ -51,8 +53,7 @@
       <tbody>
       <tr *ngFor="let bill of billHostNew; let i = index">
         <td>{{i+1}}</td>
-        <!--        <td>{{customerOder[i].username}}</td>-->
-        <td></td>
+        <td>{{customerOder[i].username}}</td>
         <td>{{bill.house.name}}</td>
         <td>{{bill.checkIn}}</td>
         <td>{{bill.checkOut}}</td>

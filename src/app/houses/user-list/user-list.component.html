@@ -15,6 +15,7 @@
       </tr>
       </thead>
       <tbody>
+      <tr *ngIf="userListHouse.length ==0" aria-colspan="8"> No Data</tr>
       <tr *ngFor=" let house of userListHouse; let i = index">
         <td>{{i + 1}}</td>
         <td>{{house.name}}</td>

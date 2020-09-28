@@ -73,7 +73,7 @@ export class CheckoutComponent implements OnInit {
     this.formCheckout = this.fb.group({
       checkIn: [''],
       checkOut: [''],
-      order: ['',Validators.required],
+      order: ['', Validators.required],
       description: ['']
     });
     this.getHouse();
@@ -83,6 +83,7 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
   getHouse() {
     const user = this.authService.getUserLogin();
     this.houseService.getHouseId(this.id).subscribe(data => {

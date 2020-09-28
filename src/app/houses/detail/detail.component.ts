@@ -7,15 +7,15 @@ import {BillService} from '../../services/bill.service';
 import {AuthService} from '../../services/auth.service';
 import {DataService} from '../../services/data.service';
 
-import {ToastrService} from "ngx-toastr";
+import {ToastrService} from 'ngx-toastr';
 import {
   AngularMyDatePickerDirective,
   CalAnimation,
   DefaultView,
   IAngularMyDpOptions,
   IMyMarkedDate
-} from "angular-mydatepicker";
-import {ImageService} from "../../services/image.service";
+} from 'angular-mydatepicker';
+import {ImageService} from '../../services/image.service';
 import {CommentService} from '../../services/comment.service';
 
 
@@ -25,6 +25,19 @@ import {CommentService} from '../../services/comment.service';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
+
+
+  constructor(private houseService: HouseService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private customerService: CustomerService,
+              private billService: BillService,
+              private fb: FormBuilder,
+              private authService: AuthService,
+              private toast: ToastrService,
+              private commentService: CommentService,
+              private imgService: ImageService) {
+  }
   @ViewChild('dp') mydp: AngularMyDatePickerDirective;
   myDatePickerOptions: IAngularMyDpOptions = {
     dateRange: false,
@@ -52,7 +65,7 @@ export class DetailComponent implements OnInit {
     disableSince: {year: 0, month: 0, day: 0},
     disableWeekdays: [],
     markDates: [],
-    markWeekends: <IMyMarkedDate>{},
+    markWeekends: {} as IMyMarkedDate,
     selectorHeight: '266px',
     selectorWidth: '266px',
     closeSelectorOnDateSelect: true,
@@ -60,7 +73,7 @@ export class DetailComponent implements OnInit {
     showMonthNumber: true,
     appendSelectorToBody: false,
     focusInputOnDateSelect: true,
-    dateRangeDatesDelimiter: " - ",
+    dateRangeDatesDelimiter: ' - ',
     defaultView: DefaultView.Date,
     showFooterToday: false,
     calendarAnimation: {in: CalAnimation.None, out: CalAnimation.None},
@@ -71,28 +84,6 @@ export class DetailComponent implements OnInit {
         styles: ''
       },
   };
-
-  disableUntil() {
-    let d: Date = new Date();
-    d.setDate(d.getDate() - 1);
-    let copy: IAngularMyDpOptions = this.getCopyOfOptions();
-    copy.disableUntil = {
-      year: d.getFullYear(),
-      month: d.getMonth() + 1,
-      day: d.getDate()
-    };
-    this.myDatePickerOptions = copy;
-    this.mydp.toggleCalendar();
-
-  }
-
-  getCopyOfOptions(): IAngularMyDpOptions {
-    return JSON.parse(JSON.stringify(this.myDatePickerOptions));
-  }
-
-  onCalendar(): void {
-    return this.mydp.openCalendar();
-  }
 
   house = {
     id: '',
@@ -119,7 +110,7 @@ export class DetailComponent implements OnInit {
     ref: ''
   };
 
-  userLogin
+  userLogin;
   comments;
   customers;
   formComment: FormGroup;
@@ -131,20 +122,30 @@ export class DetailComponent implements OnInit {
   };
 
 
-  constructor(private houseService: HouseService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private customerService: CustomerService,
-              private billService: BillService,
-              private fb: FormBuilder,
-              private authService: AuthService,
-              private toast: ToastrService,
-              private commentService: CommentService,
-              private imgService: ImageService) {
+  id = +this.route.snapshot.paramMap.get('id');
+
+  // tslint:disable-next-line:typedef
+  disableUntil() {
+    const d: Date = new Date();
+    d.setDate(d.getDate() - 1);
+    const copy: IAngularMyDpOptions = this.getCopyOfOptions();
+    copy.disableUntil = {
+      year: d.getFullYear(),
+      month: d.getMonth() + 1,
+      day: d.getDate()
+    };
+    this.myDatePickerOptions = copy;
+    this.mydp.toggleCalendar();
+
   }
 
+  getCopyOfOptions(): IAngularMyDpOptions {
+    return JSON.parse(JSON.stringify(this.myDatePickerOptions));
+  }
 
-  id = +this.route.snapshot.paramMap.get('id');
+  onCalendar(): void {
+    return this.mydp.openCalendar();
+  }
 
 // @ts-ignore
   ngOnInit():
@@ -173,6 +174,7 @@ export class DetailComponent implements OnInit {
 
   }
 
+  // tslint:disable-next-line:typedef
   getImgById() {
     this.imgService.getImageHouse(this.id).subscribe(data => {
       this.imgs = data;
@@ -181,6 +183,7 @@ export class DetailComponent implements OnInit {
   }
 
 
+  // tslint:disable-next-line:typedef
   getHouse() {
     this.houseService.getHouseId(this.id).subscribe(data => {
       this.house = data;
@@ -201,20 +204,18 @@ export class DetailComponent implements OnInit {
   }
 
 
-  alertNotBook() {
-    this.toast.error('You Cannot Book Now!', 'Error');
-  }
-
-
+  // tslint:disable-next-line:typedef
   booking() {
+    // tslint:disable-next-line:triple-equals
     if (this.house.customer_id == this.userLogin.id) {
-      this.toast.error('You Cannot Book This House!', 'Error')
+      this.toast.error('You Cannot Book This House!', 'Error');
 
+      // tslint:disable-next-line:triple-equals
     } else if (this.house.status == 'Đang Sửa Chữa') {
       this.toast.error('You Cannot Book This House', 'Error');
     } else {
 
-      this.router.navigate(['/home/checkout/' + this.house.id])
+      this.router.navigate(['/home/checkout/' + this.house.id]);
 
 
     }
@@ -237,6 +238,7 @@ export class DetailComponent implements OnInit {
         title: [''],
         content: ['']
       });
+      // tslint:disable-next-line:no-shadowed-variable
       this.commentService.getAll().subscribe(data => {
         this.comments = data;
       });

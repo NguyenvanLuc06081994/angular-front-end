@@ -24,8 +24,8 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
-        <div class="room-details-item" *ngFor=" let img of imgs ">
-          <img src="{{img.ref}}" alt="" style="width: 200px; height: 300px " >
+        <div class="room-details-item"  >
+<!--          <img src="{{img.ref}}" alt="" style="width: 200px; height: 300px " >-->
           <div class="rd-text">
             <div class="rd-title">
               <h3>{{house.name}}</h3>
@@ -37,8 +37,13 @@
                   <i class="icon_star"></i>
                   <i class="icon_star-half_alt"></i>
                 </div>
+                <div *ngIf="userLogin.id == house.id">
+                  <a [routerLink]="['/home/update',house.id]"> Update</a>
+                </div>
+                <div *ngIf="userLogin.id != house.id">
+                  <a  (click)="booking()" >Booking Now</a>
+                </div>
 
-                <a  (click)="booking()" >Booking Now</a>
               </div>
             </div>
             <h2>{{house.price}} VNĐ<span>/night</span></h2>
@@ -86,6 +91,7 @@
 
           </div>
         </div>
+
         <div class="rd-reviews">
           <h4>Reviews</h4>
           <div class="review-item" *ngFor="let comment of comments">
@@ -113,36 +119,39 @@
             </div>
           </div>
         </div>
-        <div class="review-add">
-          <h4>Add Review</h4>
-          <form action="#" class="ra-form" [formGroup]="formComment" (ngSubmit)="addComment()">
-            <div class="row">
-              <div class="col-lg-12">
-                <label for="feeling">Tell Us About Your FeeLing : </label>
-                <select name="" id="feeling" formControlName="title">
-                  <option value="" [selected]="[]">Your Feeling</option>
-                  <option value="good">Good</option>
-                  <option value="normal">normal</option>
-                  <option value="bad">Bad</option>
-                </select>
-              </div>
-              <div class="col-lg-12">
-                <div>
-                  <h5>You Rating:</h5>
-                  <div class="rating">
-                    <i class="icon_star"></i>
-                    <i class="icon_star"></i>
-                    <i class="icon_star"></i>
-                    <i class="icon_star"></i>
-                    <i class="icon_star"></i>
-                  </div>
+        <div *ngIf="userLogin.id != house.id">
+          <div class="review-add">
+            <h4>Add Review</h4>
+            <form action="#" class="ra-form" [formGroup]="formComment" (ngSubmit)="addComment()">
+              <div class="row">
+                <div class="col-lg-12">
+                  <label for="feeling">Tell Us About Your FeeLing : </label>
+                  <select name="" id="feeling" formControlName="title">
+                    <option value="" [selected]="[]">Your Feeling</option>
+                    <option value="good">Good</option>
+                    <option value="normal">normal</option>
+                    <option value="bad">Bad</option>
+                  </select>
                 </div>
-                <textarea placeholder="Your Review" formControlName="content"></textarea>
-                <button>Submit Now</button>
+                <div class="col-lg-12">
+                  <div>
+                    <h5>You Rating:</h5>
+                    <div class="rating">
+                      <i class="icon_star"></i>
+                      <i class="icon_star"></i>
+                      <i class="icon_star"></i>
+                      <i class="icon_star"></i>
+                      <i class="icon_star"></i>
+                    </div>
+                  </div>
+                  <textarea placeholder="Your Review" formControlName="content"></textarea>
+                  <button>Submit Now</button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
+
       </div>
       <div class="col-lg-4">
         <div>

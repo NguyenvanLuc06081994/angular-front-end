@@ -17,7 +17,6 @@ import {
 } from 'angular-mydatepicker';
 import {ImageService} from '../../services/image.service';
 import {CommentService} from '../../services/comment.service';
-
 import {OwlOptions} from 'ngx-owl-carousel-o';
 
 
@@ -54,6 +53,37 @@ export class DetailComponent implements OnInit {
     nav: true
   };
 
+  house = {
+    id: '',
+    name: '',
+    type_house: '',
+    type_room: '',
+    address: '',
+    bedroom: '',
+    bathroom: '',
+    description: '',
+    status: '',
+    price: '',
+    image: '',
+    customer_id: ''
+  };
+  customer: any = {
+    username: ''
+  };
+  detailForm: FormGroup;
+  dataService: any;
+  userLogin;
+  comments;
+  customers;
+  images;
+  formComment: FormGroup;
+  commentAdd = {
+    title: '',
+    content: '',
+    house_id: '',
+    user_id: ''
+  };
+
 
   constructor(private houseService: HouseService,
               private router: Router,
@@ -66,6 +96,7 @@ export class DetailComponent implements OnInit {
               private commentService: CommentService,
               private imageService: ImageService) {
   }
+
   @ViewChild('dp') mydp: AngularMyDatePickerDirective;
   myDatePickerOptions: IAngularMyDpOptions = {
     dateRange: false,
@@ -114,43 +145,6 @@ export class DetailComponent implements OnInit {
   };
 
 
-  house = {
-    id: '',
-    name: '',
-    type_house: '',
-    type_room: '',
-    address: '',
-    bedroom: '',
-    bathroom: '',
-    description: '',
-    status: '',
-    price: '',
-    image: '',
-    customer_id: ''
-  };
-  customer: any = {
-    username: ''
-  };
-  detailForm: FormGroup;
-  dataService: any;
-  imgs = {
-    id: '',
-    house_id: '',
-    ref: ''
-  };
-
-  userLogin;
-  comments;
-  customers;
-  images;
-  formComment: FormGroup;
-  commentAdd = {
-    title: '',
-    content: '',
-    house_id: '',
-    user_id: ''
-  };
-
 
 
   id = +this.route.snapshot.paramMap.get('id');
@@ -180,15 +174,15 @@ export class DetailComponent implements OnInit {
   }
 
 // @ts-ignore
-  ngOnInit():
-    void {
+  ngOnInit(): void {
     this.userLogin = this.authService.getUserLogin();
     this.detailForm = this.fb.group({
       checkIn: [''],
       checkOut: [''],
       order: ['']
     });
-    this.imageService.getImageHouse(this.id).subscribe(result=>{
+    // @ts-ignore
+    this.imgService.getImageHouse(this.id).subscribe(result => {
       this.images = result;
     });
 
@@ -196,7 +190,16 @@ export class DetailComponent implements OnInit {
       title: [''],
       content: ['']
     });
-    this.getHouse();
+    this.houseService.getHouseId(this.id).subscribe(data => {
+      this.house = data;
+      console.log(data);
+
+      // @ts-ignore
+      this.customerService.getCustomerById(this.house.customer_id).subscribe(result => {
+        // @ts-ignore
+        this.customer = result.user;
+      });
+    });
 
     this.getImgById();
 
@@ -211,29 +214,16 @@ export class DetailComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getImgById() {
-    this.imageService.getImageHouse(this.id).subscribe(data => {
-      this.imgs = data;
-      console.log(this.imgs);
+    this.imgService.getImageHouse(this.id).subscribe(data => {
+      this.images = data;
+      console.log(this.images);
     });
   }
 
 
   // tslint:disable-next-line:typedef
-  getHouse() {
-    this.houseService.getHouseId(this.id).subscribe(data => {
-      this.house = data;
 
-      // @ts-ignore
-      this.customerService.getCustomerById(this.house.customer_id).subscribe(result => {
-        // @ts-ignore
-        this.customer = result.user;
-      });
-    });
-  }
-
-  add()
-    :
-    any {
+  add(): any {
     const data = this.detailForm.value;
     this.dataService.addData(data);
   }
@@ -249,10 +239,7 @@ export class DetailComponent implements OnInit {
     } else if (this.house.status == 'Đang Sửa Chữa') {
       this.toast.error('You Cannot Book This House', 'Error');
     } else {
-
       this.router.navigate(['/home/checkout/' + this.house.id]);
-
-
     }
 
   }

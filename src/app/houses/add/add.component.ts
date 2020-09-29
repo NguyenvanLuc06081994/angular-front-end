@@ -37,13 +37,12 @@ export class AddComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  get typeHouse()
-  {
+  get typeHouse() {
     return this.addHouseForm.get('type_house');
   }
+
   // tslint:disable-next-line:typedef
-  get typeRoom()
-  {
+  get typeRoom() {
     return this.addHouseForm.get('type_room');
   }
 
@@ -63,8 +62,7 @@ export class AddComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  get status()
-  {
+  get status() {
     return this.addHouseForm.get('status');
   }
 
@@ -77,6 +75,7 @@ export class AddComponent implements OnInit {
   get description() {
     return this.addHouseForm.get('description');
   }
+
   houseAdd;
   addHouseForm: FormGroup;
   customerLogin;
@@ -88,8 +87,8 @@ export class AddComponent implements OnInit {
 
   ngOnInit(): void {
     this.addHouseForm = this.fb.group({
-      name : ['', [Validators.maxLength(120), Validators.minLength(6), Validators.required]],
-      address: ['', [Validators.required,  Validators.maxLength(250)]],
+      name: ['', [Validators.maxLength(120), Validators.minLength(6), Validators.required]],
+      address: ['', [Validators.required, Validators.maxLength(250)]],
       type_house: ['', Validators.required],
       type_room: ['', Validators.required],
       bedroom: ['', [Validators.required, Validators.min(1)]],
@@ -165,6 +164,4 @@ export class AddComponent implements OnInit {
   showSuccess() {
     this.toast.success('Add New House Success!!', 'Alert');
   }
-
-
 }

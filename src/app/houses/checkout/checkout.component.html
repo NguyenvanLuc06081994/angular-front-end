@@ -31,7 +31,7 @@
           </div>
           <div class="check-date">
             <label for="date-out">Check Out:</label>
-            <input type="date" class="date-input" id="date-out" formControlName="checkOut">
+            <input type="date" class="date-input" id="date-out" formControlName="checkOut" >
           </div>
          <div class="check-date">
            <label>Your Full Name:</label>
@@ -74,8 +74,12 @@
       <div class="room-details-item">
         <img src="{{house.image}}" alt="">
         <div class="rd-text">
-
-          <h2>{{house.price}} VNĐ<span>/night</span></h2>
+          <div *ngIf="showPirce == 0">
+            <h2>{{house.price}} VNĐ<span>/night</span></h2>
+          </div>
+          <div *ngIf="showPirce!=0">
+            <h2>{{showPirce}} VNĐ<span>/night</span></h2>
+          </div>
           <table>
             <tbody>
             <tr>

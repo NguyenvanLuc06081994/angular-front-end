@@ -54,6 +54,7 @@ export class CheckoutComponent implements OnInit {
   email;
   Adults = '1 Adults';
   totalPrice;
+  showPirce = 1500;
 
   constructor(private houseService: HouseService,
               private router: Router,
@@ -125,7 +126,7 @@ export class CheckoutComponent implements OnInit {
 
     const checkOut = new Date(this.formCheckout.value.checkOut);
 
-    const result = this.caculatePrice(checkIn,checkOut);
+    const result = this.caculatePrice(checkIn, checkOut);
     // @ts-ignore
     this.bill.totalPrice = result * this.house.price;
     // @ts-ignore
@@ -145,28 +146,31 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  // tslint:disable-next-line:typedef
   caculatePrice(checkIn, checkOut)
   {
-    let dayOfMonth = [31,28,31,30,31,30,31,31,30,31,30,31];
-    let result =0;
-    if(checkIn.getFullYear() == checkOut.getFullYear())
+    const dayOfMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    let result = 0;
+    // tslint:disable-next-line:triple-equals
+    if (checkIn.getFullYear() == checkOut.getFullYear())
     {
-      if(checkIn.getMonth() == checkOut.getMonth())
+      // tslint:disable-next-line:triple-equals
+      if (checkIn.getMonth() == checkOut.getMonth())
       {
-        result = result+ checkOut.getDate() - checkIn.getDate();
+        result = result + checkOut.getDate() - checkIn.getDate();
         return result;
       }
       else {
-        if (checkOut.getMonth()-checkIn.getMonth() == 1)
+        if (checkOut.getMonth() - checkIn.getMonth() == 1)
         {
           result = result + checkOut.getDate() + dayOfMonth[checkIn.getMonth()] - checkIn.getDate();
           return  result;
         }
         else {
-          let countMonth = checkOut.getMonth()-checkIn.getMonth();
-          for(let i = 1; i<countMonth;i++)
+          const countMonth = checkOut.getMonth() - checkIn.getMonth();
+          for (let i = 1; i < countMonth; i++)
           {
-            result += dayOfMonth[checkIn.getMonth()+i];
+            result += dayOfMonth[checkIn.getMonth() + i];
           }
           result = result + checkOut.getDate() + dayOfMonth[checkIn.getMonth()] - checkIn.getDate();
           return result;

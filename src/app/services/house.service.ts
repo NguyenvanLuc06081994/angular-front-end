@@ -45,8 +45,7 @@ export class HouseService extends HttpBaseService {
     return this.http.post(environment.url + '/houses/multiSearch', data, {headers: this.getHeaders()});
   }
 
-  updateHouse(id:number, house: IHouse)
-  {
+  updateHouse(id: number, house: IHouse) {
     return this.http.put<any>(environment.url + '/houses' + '/' + id, house, {headers: this.getHeaders()});
   }
 }

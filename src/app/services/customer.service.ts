@@ -25,13 +25,13 @@ export class CustomerService extends HttpBaseService {
   }
 
   // tslint:disable-next-line:typedef
-  getAllCustomers(): Observable<ICustomer[]> {
-    return this.http.get<ICustomer[]>(environment.url + '/customers', {headers: this.getHeaders()});
+  getAllCustomers(): Observable<any> {
+    return this.http.get<any>(environment.url + '/customers', {headers: this.getHeaders()});
   }
 
   // tslint:disable-next-line:typedef
-  getCustomerById(id: number): Observable<ICustomer> {
-    return this.http.get<ICustomer>(environment.url + '/customers' + '/' + id, {headers: this.getHeaders()});
+  getCustomerById(id: number): Observable<any> {
+    return this.http.get<any>(environment.url + '/customers' + '/' + id, {headers: this.getHeaders()});
   }
 
   changeProfile(id: number, data): Observable<any> {

@@ -17,7 +17,7 @@ import {
 } from 'angular-mydatepicker';
 import {ImageService} from '../../services/image.service';
 import {CommentService} from '../../services/comment.service';
-import {ImageService} from '../../services/image.service';
+
 import {OwlOptions} from 'ngx-owl-carousel-o';
 
 
@@ -52,7 +52,7 @@ export class DetailComponent implements OnInit {
       }
     },
     nav: true
-  }
+  };
 
 
   constructor(private houseService: HouseService,
@@ -64,7 +64,7 @@ export class DetailComponent implements OnInit {
               private authService: AuthService,
               private toast: ToastrService,
               private commentService: CommentService,
-              private imgService: ImageService) {
+              private imageService: ImageService) {
   }
   @ViewChild('dp') mydp: AngularMyDatePickerDirective;
   myDatePickerOptions: IAngularMyDpOptions = {
@@ -211,7 +211,7 @@ export class DetailComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   getImgById() {
-    this.imgService.getImageHouse(this.id).subscribe(data => {
+    this.imageService.getImageHouse(this.id).subscribe(data => {
       this.imgs = data;
       console.log(this.imgs);
     });

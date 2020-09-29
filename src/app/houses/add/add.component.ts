@@ -139,6 +139,7 @@ export class AddComponent implements OnInit {
           image.house_id = houseId;
           this.downloadURL = url;
           image.ref = url;
+          console.log(url);
           this.imageService.addHouseImage(image).subscribe(data => {
             this.a = data;
             console.log(this.a);

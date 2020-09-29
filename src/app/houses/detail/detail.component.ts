@@ -52,6 +52,7 @@ export class DetailComponent implements OnInit {
     },
     nav: true
   };
+
   house = {
     id: '',
     name: '',
@@ -93,7 +94,7 @@ export class DetailComponent implements OnInit {
               private authService: AuthService,
               private toast: ToastrService,
               private commentService: CommentService,
-              private imgService: ImageService) {
+              private imageService: ImageService) {
   }
 
   @ViewChild('dp') mydp: AngularMyDatePickerDirective;

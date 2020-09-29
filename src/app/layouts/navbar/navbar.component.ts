@@ -25,10 +25,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.getUserLogin();
-    this.customerService.getCustomerById(this.user.id).subscribe(data=>{
+    console.log(this.user.id);
+    this.customerService.getCustomerById(this.user.id).subscribe(data => {
       // @ts-ignore
-      this.userLoginCurrent = data.user;
-    })
+      this.userLoginCurrent = data;
+      console.log(this.userLoginCurrent);
+    });
     this.houseService.getAllHouse().subscribe(data => {
       this.houses = data;
     });

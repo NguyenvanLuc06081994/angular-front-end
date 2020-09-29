@@ -190,7 +190,11 @@
         <a href="" [routerLink]="['/home/detail',house.id]">
         <div >
           <div class="room-item">
-            <img src="{{image}}" alt="" style="width: 150px; height: 350px">
+            <ng-container *ngFor="let image of images">
+              <div *ngIf="image.house_id == house.id">
+                <img src="{{image.ref}}" alt="">
+              </div>
+            </ng-container>
             <div class="ri-text">
               <h4>{{house.name}}</h4>
               <h3>{{house.price}} VNĐ<span>/night</span></h3>

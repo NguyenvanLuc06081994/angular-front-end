@@ -24,8 +24,28 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
+
+        <div class="room-details-item">
+          <owl-carousel-o [options]="customOptions">
+            <ng-container *ngFor="let image of images">
+              <ng-template carouselSlide>
+                <div class="slide" >
+                  <img src="{{image.ref}}"  alt="">
+                </div>
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+<!--            <ng-template carouselSlide>-->
+<!--              <div class="slide">-->
+<!--                <img src="{{images[1].ref}}" alt="">-->
+<!--              </div>-->
+<!--            </ng-template>-->
+
+<!--          <img src="{{images[0].ref}}" alt="">-->
+
         <div class="room-details-item"  >
 <!--          <img src="{{img.ref}}" alt="" style="width: 200px; height: 300px " >-->
+
           <div class="rd-text">
             <div class="rd-title">
               <h3>{{house.name}}</h3>
@@ -95,6 +115,7 @@
         <div class="rd-reviews">
           <h4>Reviews</h4>
           <div class="review-item" *ngFor="let comment of comments">
+            <div *ngIf="comment.house_id == house.id">
             <ng-container *ngFor="let customer of customers">
               <div *ngIf="customer.id == comment.user_id">
                 <div class="ri-pic">
@@ -117,6 +138,7 @@
               </ng-container>
               <p>{{comment.content}}</p>
             </div>
+          </div>
           </div>
         </div>
         <div *ngIf="userLogin.id != house.id">

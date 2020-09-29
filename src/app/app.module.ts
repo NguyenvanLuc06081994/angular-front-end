@@ -32,6 +32,7 @@ import { ProfileComponent } from './customers/profile/profile.component';
 import { PasswordComponent } from './customers/password/password.component';
 import { BNewComponent } from './bills/b-new/b-new.component';
 import { BOldComponent } from './bills/b-old/b-old.component';
+import {CarouselModule} from 'ngx-owl-carousel-o';
 
 import {AngularMyDatePickerModule} from "angular-mydatepicker";
 
@@ -76,6 +77,8 @@ import { UpdateComponent } from './houses/update/update.component';
     AngularFirestoreModule,
     AngularMyDatePickerModule,
     BrowserAnimationsModule,
+
+    CarouselModule,
 
     NgxDropzoneModule,
     ToastrModule.forRoot({

@@ -1,6 +1,9 @@
 import {Injectable} from '@angular/core';
 import {CustomerService} from './customer.service';
 import {logger} from 'codelyzer/util/logger';
+import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,8 @@ export class LoginService {
   token;
   customer;
 
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService,
+              private http: HttpClient) {
   }
 
   findCustomer(data): any {
@@ -30,5 +34,13 @@ export class LoginService {
 
   getCustomer(): any {
     return JSON.parse(localStorage.getItem('customerLogin'));
+  }
+
+  loginGoogle(): Observable<any> {
+    return this.http.get('http://127.0.0.1:8000/api/auth/redirect/google');
+  }
+
+  loginSuccess(): Observable<any> {
+    return this.http.get(environment.url + '/callback/google');
   }
 }

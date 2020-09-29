@@ -4,6 +4,7 @@ import {LoginService} from '../../services/login.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {ToastrService} from 'ngx-toastr';
+import {CustomerService} from '../../services/customer.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private fb: FormBuilder,
               private authService: AuthService,
-              private toast: ToastrService) {
+              private toast: ToastrService,
+              private customerService: CustomerService) {
   }
 
   ngOnInit(): void {

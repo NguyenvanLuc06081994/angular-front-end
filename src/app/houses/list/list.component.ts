@@ -15,7 +15,6 @@ export class ListComponent implements OnInit {
   // @ts-ignore
   listHouse = [];
   images;
-  image;
   formSearch: FormGroup;
 
   constructor(private houseService: HouseService,
@@ -29,9 +28,9 @@ export class ListComponent implements OnInit {
       data => {
         this.listHouse = data;
       });
-    this.imageService.getAllImages().subscribe(data => {
+    this.imageService.getOneImage().subscribe(data => {
       this.images = data;
-      this.image = this.images[0].ref;
+      console.log(data);
     });
     this.formSearch = this.fb.group({
       name: [''],

@@ -7,9 +7,9 @@ import {LoginService} from '../../services/login.service';
 import {AuthService} from '../../services/auth.service';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
-import {ToastrService} from "ngx-toastr";
-import {ImageService} from "../../services/image.service";
-import {ImagePayload} from "../../model/images/image.component";
+import {ToastrService} from 'ngx-toastr';
+import {ImageService} from '../../services/image.service';
+import {ImagePayload} from '../../model/images/image.component';
 
 
 @Component({
@@ -18,7 +18,6 @@ import {ImagePayload} from "../../model/images/image.component";
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-  houseAdd;
 
   constructor(private fb: FormBuilder,
               private houseService: HouseService,
@@ -37,13 +36,15 @@ export class AddComponent implements OnInit {
     return this.addHouseForm.get('name');
   }
 
+  // tslint:disable-next-line:typedef
   get typeHouse()
   {
     return this.addHouseForm.get('type_house');
   }
+  // tslint:disable-next-line:typedef
   get typeRoom()
   {
-    return this.addHouseForm.get('type_room')
+    return this.addHouseForm.get('type_room');
   }
 
   // tslint:disable-next-line:typedef
@@ -62,6 +63,12 @@ export class AddComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
+  get status()
+  {
+    return this.addHouseForm.get('status');
+  }
+
+  // tslint:disable-next-line:typedef
   get price() {
     return this.addHouseForm.get('price');
   }
@@ -70,29 +77,29 @@ export class AddComponent implements OnInit {
   get description() {
     return this.addHouseForm.get('description');
   }
-
+  houseAdd;
   addHouseForm: FormGroup;
   customerLogin;
   downloadURL: string;
   files = [];
   a;
 
+  uploadPercents = [];
 
   ngOnInit(): void {
     this.addHouseForm = this.fb.group({
-
       name : ['', [Validators.maxLength(120), Validators.minLength(6), Validators.required]],
       address: ['', [Validators.required,  Validators.maxLength(250)]],
-      type_house: ['',Validators.required],
-      type_room: ['',Validators.required],
+      type_house: ['', Validators.required],
+      type_room: ['', Validators.required],
       bedroom: ['', [Validators.required, Validators.min(1)]],
       bathroom: ['', [Validators.required, Validators.min(1)]],
       description: ['', [Validators.required, Validators.maxLength(250)]],
-      status: [''],
+      status: ['', Validators.required],
       price: ['', [Validators.required]],
     });
     this.customerLogin = this.authService.getUserLogin();
-    console.log(new Date())
+
   }
 
   // tslint:disable-next-line:typedef
@@ -120,12 +127,10 @@ export class AddComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-  uploadPercents = [];
-
   upload(i: number, file: File, houseId: number, size: number): void {
     const filePath = `houses/${Date.now()}`;
     const task = this.storage.upload(filePath, file);
-    let fileRef = this.storage.ref(filePath);
+    const fileRef = this.storage.ref(filePath);
     this.uploadPercents[i] = task.percentageChanges();
     task.snapshotChanges().pipe(
       finalize(() => fileRef.getDownloadURL().subscribe(
@@ -150,11 +155,12 @@ export class AddComponent implements OnInit {
   }
 
 
-
+  // tslint:disable-next-line:typedef
   list() {
     this.router.navigate(['home']);
   }
 
+  // tslint:disable-next-line:typedef
   showSuccess() {
     this.toast.success('Add New House Success!!', 'Alert');
   }

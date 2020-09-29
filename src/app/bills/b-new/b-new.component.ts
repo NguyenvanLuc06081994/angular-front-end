@@ -55,9 +55,6 @@ export class BNewComponent implements OnInit {
       }
     });
     this.getHostHouse();
-    console.log(typeof (this.todayDate.getDate()));
-    console.log(this.todayDate.getMonth()+1);
-    console.log(this.todayDate.getDate());
 
   }
 

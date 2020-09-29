@@ -34,6 +34,12 @@ import { BNewComponent } from './bills/b-new/b-new.component';
 import { BOldComponent } from './bills/b-old/b-old.component';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 
+import {AngularMyDatePickerModule} from "angular-mydatepicker";
+
+import { UserListComponent } from './houses/user-list/user-list.component';
+import { UpdateComponent } from './houses/update/update.component';
+
+
 
 
 
@@ -56,7 +62,9 @@ import {CarouselModule} from 'ngx-owl-carousel-o';
     ProfileComponent,
     PasswordComponent,
     BNewComponent,
-    BOldComponent
+    BOldComponent,
+    UserListComponent,
+    UpdateComponent
 
   ],
   imports: [
@@ -67,9 +75,11 @@ import {CarouselModule} from 'ngx-owl-carousel-o';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularMyDatePickerModule,
     BrowserAnimationsModule,
 
     CarouselModule,
+
     NgxDropzoneModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',

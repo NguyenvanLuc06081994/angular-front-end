@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <h1 class="text-center"> List Your House </h1>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">House Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Type House</th>
+        <th scope="col">Type Room</th>
+        <th scope="col">Status</th>
+        <th scope="col">Address</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngIf="userListHouse.length ==0" aria-colspan="8"> No Data</tr>
+      <tr *ngFor=" let house of userListHouse; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{house.name}}</td>
+        <td>{{house.price}}</td>
+        <td>{{house.type_house}}</td>
+        <td>{{house.type_room}}</td>
+        <td>{{house.status}}</td>
+        <td>{{house.address}}</td>
+        <td><a class="btn btn-info" [routerLink]="['/home/update',house.id]">Edit</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

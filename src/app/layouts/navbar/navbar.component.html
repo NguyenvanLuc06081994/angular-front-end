@@ -31,7 +31,7 @@
   <nav class="mainmenu mobile-menu">
     <ul>
       <li class="active"><a href="./index.html">Home</a></li>
-      <li><a href="">Rooms</a></li>
+      <li><a href="">Houses</a></li>
       <li><a href="">About Us</a></li>
       <li><a href="">Pages</a>
         <ul class="dropdown">
@@ -85,6 +85,7 @@
                 <ul>
                   <li><a [routerLink]="['/home/bills']">Bill</a></li>
                   <li><a [routerLink]="['/home/add']">Add Home</a></li>
+                  <li><a [routerLink]="['/home/userList']">Your Home</a></li>
                   <li><a href="" [routerLink]="['profile', userLoginCurrent.id]">Change Your Profile</a></li>
                   <li><a href="" (click)="logout()">Logout</a></li>
                 </ul>

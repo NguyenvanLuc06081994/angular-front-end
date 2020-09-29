@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      username: ['', [Validators.maxLength(30), Validators.minLength(6), Validators.required]],
+      username: ['', [Validators.maxLength(30), Validators.minLength(2), Validators.required]],
       email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
       phone: ['', [Validators.required, Validators.pattern(this.phonePattern), Validators.maxLength(10)]],
       address: ['', [Validators.required, Validators.maxLength(30)]],
@@ -106,8 +106,9 @@ export class RegisterComponent implements OnInit {
       .subscribe();
   }
 
-  // tslint:disable-next-line:typedef
+
   register() {
+    console.log(this.registerForm.value.inputFile);
     this.registerService.register(this.registerForm.value).subscribe(data => {
       this.router.navigate(['login']);
     });

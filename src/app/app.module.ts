@@ -32,6 +32,7 @@ import { ProfileComponent } from './customers/profile/profile.component';
 import { PasswordComponent } from './customers/password/password.component';
 import { BNewComponent } from './bills/b-new/b-new.component';
 import { BOldComponent } from './bills/b-old/b-old.component';
+import {CarouselModule} from 'ngx-owl-carousel-o';
 
 
 
@@ -67,6 +68,8 @@ import { BOldComponent } from './bills/b-old/b-old.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     BrowserAnimationsModule,
+
+    CarouselModule,
     NgxDropzoneModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',

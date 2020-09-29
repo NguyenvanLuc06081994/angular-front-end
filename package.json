@@ -23,6 +23,7 @@
     "angular-toastr": "^2.1.1",
     "firebase": "^7.21.0",
     "ngx-dropzone": "^2.2.2",
+    "ngx-owl-carousel-o": "^4.0.0",
     "ngx-toastr": "^13.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",

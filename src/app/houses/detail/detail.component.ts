@@ -8,6 +8,8 @@ import {AuthService} from '../../services/auth.service';
 import {DataService} from '../../services/data.service';
 import {ToastrService} from 'ngx-toastr';
 import {CommentService} from '../../services/comment.service';
+import {ImageService} from '../../services/image.service';
+import {OwlOptions} from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-detail',
@@ -15,6 +17,32 @@ import {CommentService} from '../../services/comment.service';
   styleUrls: ['./detail.component.css']
 })
 export class DetailComponent implements OnInit {
+
+  customOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: false,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    navSpeed: 700,
+    navText: ['Previous', 'Next'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: true
+  }
+
   house = {
     id: '',
     name: '',
@@ -36,6 +64,7 @@ export class DetailComponent implements OnInit {
   dataService: any;
   comments;
   customers;
+  images;
   formComment: FormGroup;
   commentAdd = {
     title: '',
@@ -52,7 +81,8 @@ export class DetailComponent implements OnInit {
               private fb: FormBuilder,
               private authService: AuthService,
               private toast: ToastrService,
-              private commentService: CommentService
+              private commentService: CommentService,
+              private imageService: ImageService
   ) {
 
   }
@@ -65,6 +95,9 @@ export class DetailComponent implements OnInit {
       checkIn: [''],
       checkOut: [''],
       order: ['']
+    });
+    this.imageService.getImageHouse(this.id).subscribe(result=>{
+      this.images = result;
     });
 
     this.formComment = this.fb.group({
